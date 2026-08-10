@@ -1,0 +1,2598 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Blaise Chiamaka — Full Stack Developer, Fashion Designer & Baker. Building modern websites and web applications, and founder of Bliss Juli Limited in Nigeria."
+    />
+    <meta name="author" content="Blaise Chiamaka" />
+    <meta name="theme-color" content="#12161A" />
+    <title>
+      Blaise Chiamaka — Full Stack Developer | Fashion Designer | Baker
+    </title>
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%231E6FFF'>✦</text></svg>"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+    
+    
+    
+    
+    <div class="bg-fx" aria-hidden="true">
+      <div class="bg-grid"></div>
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="glass-panel gp-1"></div>
+      <div class="glass-panel gp-2"></div>
+      <div class="particles" id="particles"></div>
+    </div>
+
+    
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+    
+    
+    
+    <header class="nav" id="navbar">
+      <nav class="nav-inner" aria-label="Main navigation">
+        <a href="#home" class="logo" aria-label="Bliss portfolio home">
+          <span class="logo-mark">✦</span>
+          <span class="logo-text">Bliss<span class="logo-dot">.</span></span>
+        </a>
+
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <a href="#contact" class="btn btn-primary btn-sm nav-cta">Let's Talk</a>
+
+        <button
+          class="hamburger"
+          id="hamburger"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobileMenu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+
+      
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="m-link">Home</a>
+        <a href="#about" class="m-link">About</a>
+        <a href="#services" class="m-link">Services</a>
+        <a href="#portfolio" class="m-link">Portfolio</a>
+        <a href="#skills" class="m-link">Skills</a>
+        <a href="#experience" class="m-link">Experience</a>
+        <a href="#testimonials" class="m-link">Testimonials</a>
+        <a href="#contact" class="m-link">Contact</a>
+        <a href="#contact" class="btn btn-primary m-cta">Let's Talk</a>
+      </div>
+    </header>
+
+    <main id="main">
+      
+      
+      <section class="hero" id="home">
+        <div class="hero-inner">
+          
+          <div class="hero-content">
+            
+            <p class="hero-greeting" data-reveal>Hello, I'm</p>
+
+            
+            <h1 class="hero-name" data-reveal data-delay="0.1">
+              Blaise <span class="gradient-text">Chiamaka</span>
+            </h1>
+
+            
+            <div class="hero-role" data-reveal data-delay="0.2">
+              <span class="role-cursor"></span>
+              <span id="roleTypewriter"></span>
+            </div>
+
+            
+            <p class="hero-tagline" data-reveal data-delay="0.3">
+              I build modern websites and web applications end-to-end — and as
+              founder of
+              <strong>Bliss Juli Limited</strong>, I bring the same craft to
+              fashion and baking.
+            </p>
+
+            <div class="hero-actions" data-reveal data-delay="0.4">
+              
+              
+              
+              
+              
+              <a
+                href="cv/Blaise-Chiamaka-CV.pdf"
+                download
+                class="btn btn-primary btn-magnetic"
+                data-ripple
+                ><svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" x2="12" y1="15" y2="3" /></svg
+                >Download CV</a
+              >
+              <a
+                href="#contact"
+                class="btn btn-outline btn-magnetic"
+                data-ripple
+                >Hire Me</a
+              >
+              <a
+                href="#portfolio"
+                class="btn btn-ghost btn-magnetic"
+                data-ripple
+                >View My Work</a
+              >
+            </div>
+          </div>
+
+          
+          <div class="hero-media" data-reveal="zoom" data-delay="0.2">
+            <div class="profile-frame float-anim">
+              <div class="avatar-circle">
+                
+                <img
+                  src="image/WhatsApp Image 2026-06-16 at 2.27.14 PM.jpeg"
+                  alt="Portrait of Blaise Chiamaka"
+                  loading="eager"
+                  width="400"
+                  height="400"
+                />
+              </div>
+              
+              <div class="float-badge fb-1">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="m16 18 6-6-6-6" />
+                  <path d="m8 6-6 6 6 6" /></svg
+                >Full Stack Developer
+              </div>
+              <div class="float-badge fb-2">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"
+                  /></svg
+                >Fashion Designer
+              </div>
+              <div class="float-badge fb-3">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"
+                  />
+                  <path d="M6 17h12" /></svg
+                >Baker
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="stats-row hero-stats" data-reveal>
+          <div class="stat-box">
+            <h3><span class="count" data-target="4">0</span>+</h3>
+            <p>Projects Built</p>
+          </div>
+          <div class="stat-box">
+            <h3><span class="count" data-target="10">0</span>+</h3>
+            <p>Outfits Created</p>
+          </div>
+          <div class="stat-box">
+            <h3><span class="count" data-target="10">0</span>+</h3>
+            <p>Events &amp; Cakes</p>
+          </div>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="about">
+        <span class="section-tag central" data-reveal>ABOUT ME</span>
+        <h2 class="section-title" data-reveal>
+          Full Stack Developer. Fashion Designer.
+          <span class="gradient-text">Baker.</span>
+        </h2>
+
+        <div class="about-grid">
+          
+          <article class="about-card glass" data-reveal="left">
+            <div class="about-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 7v14" />
+                <path
+                  d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+                />
+              </svg>
+            </div>
+            <h3>My Story</h3>
+            
+            <p>
+              I'm a passionate Full Stack Developer from Nigeria who builds
+              modern websites and web applications with clean, scalable code.
+              I'm also the founder of <strong>Bliss Juli Limited</strong>, where
+              I bring the same craft and care to fashion design and baking.
+            </p>
+          </article>
+
+          
+          <article class="about-card glass" data-reveal="left" data-delay="0.1">
+            <div class="about-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
+                />
+              </svg>
+            </div>
+            <h3>What I Do</h3>
+            
+            <p>
+              I design, build and deploy complete web solutions — from
+              pixel-perfect frontends to solid backends and databases. Through
+              Bliss Juli Limited, I also create custom outfits and delicious
+              cakes &amp; pastries for clients across Nigeria.
+            </p>
+          </article>
+
+          
+          <article class="about-card glass" data-reveal="left" data-delay="0.2">
+            <div class="about-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
+              </svg>
+            </div>
+            <h3>My Mission</h3>
+            
+            <p>
+              To use technology to solve real problems beautifully — while
+              building a creative business that empowers my community through
+              software, fashion and food.
+            </p>
+          </article>
+
+          
+          <article class="about-card glass" data-reveal="left" data-delay="0.3">
+            <div class="about-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                />
+                <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />
+              </svg>
+            </div>
+            <h3>Why Clients Love Me</h3>
+            
+            <p>
+              Reliable communication, clean and maintainable code, on-time
+              delivery, and genuine care for every project and every client —
+              technical or creative.
+            </p>
+          </article>
+        </div>
+
+        
+        <div class="about-typewriter-wrap" data-reveal>
+          <p id="about-typewriter"></p>
+        </div>
+
+        
+        <div class="values-row" data-reveal>
+          
+          <span class="value-chip"
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 3h12l4 6-10 13L2 9Z" />
+              <path d="M11 3 8 9l4 13 4-13-3-6" />
+              <path d="M2 9h20" /></svg
+            >Integrity</span
+          >
+          <span class="value-chip"
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+              />
+              <path d="M20 3v4" />
+              <path d="M22 5h-4" /></svg
+            >Excellence</span
+          >
+          <span class="value-chip"
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"
+              />
+              <path
+                d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"
+              />
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /></svg
+            >Curiosity</span
+          >
+          <span class="value-chip"
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="10" x2="14" y1="2" y2="2" />
+              <line x1="12" x2="15" y1="14" y2="11" />
+              <circle cx="12" cy="14" r="8" /></svg
+            >Discipline</span
+          >
+          <span class="value-chip"
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"
+              />
+              <path d="M9 18h6" />
+              <path d="M10 22h4" /></svg
+            >Creativity</span
+          >
+          <span class="value-chip"
+            ><svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+              <path d="M2 12h20" /></svg
+            >Empathy</span
+          >
+        </div>
+      </section>
+
+      
+      
+      <section class="section stats-section">
+        <div class="stats-row">
+          <div class="stat-box glass">
+            <h3><span class="count" data-target="4">0</span>+</h3>
+            <p>Projects Built</p>
+          </div>
+          <div class="stat-box glass">
+            <h3><span class="count" data-target="10">0</span>+</h3>
+            <p>Outfits Created</p>
+          </div>
+          <div class="stat-box glass">
+            <h3><span class="count" data-target="10">0</span>+</h3>
+            <p>Events &amp; Cakes</p>
+          </div>
+          <div class="stat-box glass">
+            <h3><span class="count" data-target="2">0</span></h3>
+            <p>Awards</p>
+          </div>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="skills">
+        <span class="section-tag central" data-reveal>CAPABILITIES</span>
+        <h2 class="section-title" data-reveal>
+          My <span class="gradient-text">Skills</span>
+        </h2>
+
+        <div class="skills-grid">
+          
+          <div class="skill-category glass" data-reveal>
+            <h3 class="skill-cat-title">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect width="20" height="14" x="2" y="3" rx="2" />
+                <line x1="8" x2="16" y1="21" y2="21" />
+                <line x1="12" x2="12" y1="17" y2="21" /></svg
+              >Frontend
+            </h3>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML</span>
+              <span class="skill-tag">CSS</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">Responsive Design</span>
+            </div>
+          </div>
+
+          
+          <div class="skill-category glass" data-reveal data-delay="0.1">
+            <h3 class="skill-cat-title">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect width="20" height="8" x="2" y="2" rx="2" ry="2" />
+                <rect width="20" height="8" x="2" y="14" rx="2" ry="2" />
+                <line x1="6" x2="6.01" y1="6" y2="6" />
+                <line x1="6" x2="6.01" y1="18" y2="18" /></svg
+              >Backend
+            </h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Node.js / Express.js</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Django</span>
+              <span class="skill-tag">REST API Design</span>
+            </div>
+          </div>
+
+          
+          <div class="skill-category glass" data-reveal data-delay="0.2">
+            <h3 class="skill-cat-title">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+                <path d="M3 12A9 3 0 0 0 21 12" /></svg
+              >Databases
+            </h3>
+            <div class="skill-tags">
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">Supabase</span>
+              <span class="skill-tag">Firebase</span>
+            </div>
+          </div>
+
+          
+          <div class="skill-category glass" data-reveal data-delay="0.3">
+            <h3 class="skill-cat-title">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"
+                /></svg
+              >Tools
+            </h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Git &amp; GitHub</span>
+              <span class="skill-tag">VS Code</span>
+              <span class="skill-tag">Vercel</span>
+              <span class="skill-tag">Any Design → Code</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      
+      
+      <section class="section" id="services">
+        <span class="section-tag central" data-reveal>SERVICES</span>
+        <h2 class="section-title" data-reveal>
+          My <span class="gradient-text">Specialties</span>
+        </h2>
+
+        <div class="specialties-grid">
+          <div class="spec-card glass tilt" data-reveal>
+            <div class="service-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m16 18 6-6-6-6" />
+                <path d="m8 6-6 6 6 6" />
+              </svg>
+            </div>
+            <h3>Full Stack Development</h3>
+            <p>
+              Complete web applications — frontend, backend and database —
+              designed, built and deployed end-to-end.
+            </p>
+            <a href="#portfolio" class="service-link" data-filter="Full Stack"
+              >Learn More →</a
+            >
+          </div>
+          <div class="spec-card glass tilt" data-reveal data-delay="0.2">
+            <div class="service-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect width="20" height="14" x="2" y="3" rx="2" />
+                <line x1="8" x2="16" y1="21" y2="21" />
+                <line x1="12" x2="12" y1="17" y2="21" />
+              </svg>
+            </div>
+            <h3>Website Design</h3>
+            <p>
+              Premium, modern website designs that turn your brand into an
+              unforgettable digital experience.
+            </p>
+            <a href="#portfolio" class="service-link" data-filter="Frontend"
+              >Learn More →</a
+            >
+          </div>
+          <div class="spec-card glass tilt" data-reveal data-delay="0.2">
+            <div class="service-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+                <path d="M3 12A9 3 0 0 0 21 12" />
+              </svg>
+            </div>
+            <h3>Database Design</h3>
+            <p>
+              Well-structured databases with MySQL, MongoDB, Supabase or
+              Firebase — modelled for growth.
+            </p>
+            <a href="#portfolio" class="service-link" data-filter="Full Stack"
+              >Learn More →</a
+            >
+          </div>
+          <div class="spec-card glass tilt" data-reveal>
+            <div class="service-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"
+                />
+              </svg>
+            </div>
+            <h3>Fashion Design</h3>
+            <p>
+              Custom outfits and occasion wear designed, cut and finished to a
+              perfect fit — via Bliss Juli Limited.
+            </p>
+            <a href="#portfolio" class="service-link" data-filter="Fashion"
+              >Learn More →</a
+            >
+          </div>
+          <div class="spec-card glass tilt" data-reveal data-delay="0.1">
+            <div class="service-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"
+                />
+                <path d="M6 17h12" />
+              </svg>
+            </div>
+            <h3>Cake &amp; Pastry Services</h3>
+            <p>
+              Freshly baked cakes and pastries for birthdays, weddings and
+              celebrations — via Bliss Juli Limited.
+            </p>
+            <a href="#portfolio" class="service-link" data-filter="Bakery"
+              >Learn More →</a
+            >
+          </div>
+        </div>
+      </section>
+
+      
+      
+      
+      
+      <section class="section" id="portfolio">
+        <span class="section-tag central" data-reveal>PORTFOLIO</span>
+        <h2 class="section-title" data-reveal>
+          Featured <span class="gradient-text">Projects</span>
+        </h2>
+
+        
+        <div
+          class="filters"
+          data-reveal
+          role="group"
+          aria-label="Filter projects by category"
+        >
+          <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter-btn" data-filter="Full Stack" aria-pressed="false">
+            Full Stack
+          </button>
+          <button class="filter-btn" data-filter="Frontend" aria-pressed="false">Frontend</button>
+          <button class="filter-btn" data-filter="Fashion" aria-pressed="false">Fashion</button>
+          <button class="filter-btn" data-filter="Bakery" aria-pressed="false">Bakery</button>
+        </div>
+
+        <div class="projects-grid" id="projectsGrid">
+          
+          
+          <article
+            class="project-card glass tilt"
+            data-category="Full Stack"
+            data-project="p1"
+            data-reveal
+          >
+            
+            <div class="project-media">
+              <img
+                src="image/love-story-hero.jpg"
+                alt="Love Story interactive website art"
+                loading="lazy"
+                data-src="image/love-story-hero.jpg"
+              />
+              <div class="project-media-fallback">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div class="project-body">
+              
+              <h3 class="project-title">Love Story Interactive Website</h3>
+              
+              <p class="project-desc">
+                A romantic interactive website with music, playful questions and
+                hidden surprises — built for proposals and confessions.
+              </p>
+              <div class="project-meta">
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    <rect width="20" height="14" x="2" y="6" rx="2" /></svg
+                  >Personal Project</span
+                >
+                
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M8 2v4" />
+                    <path d="M16 2v4" />
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <path d="M3 10h18" /></svg
+                  >2026</span
+                >
+              </div>
+              <div class="project-links">
+                
+                <a
+                  href="https://love-web-wheat.vercel.app/"
+                  class="btn btn-sm btn-primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Live Demo</a
+                >
+                
+                <a
+                  href="https://github.com/blissjuli"
+                  class="btn btn-sm btn-outline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >GitHub</a
+                >
+                <button class="btn btn-sm btn-ghost js-open-modal">
+                  Case Study
+                </button>
+              </div>
+            </div>
+          </article>
+
+          
+          <article
+            class="project-card glass tilt"
+            data-category="Frontend"
+            data-project="p2"
+            data-reveal
+          >
+            
+            <div class="project-media">
+              <img
+                src="image/todo-hero.jpg"
+                alt="To-Do List app art"
+                loading="lazy"
+                data-src="image/todo-hero.jpg"
+              />
+              <div class="project-media-fallback">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect width="18" height="18" x="3" y="3" rx="2" />
+                  <path d="m9 8 3 3 4-4" />
+                  <path d="M9 14h6" />
+                </svg>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">To-Do List App</h3>
+              <p class="project-desc">
+                A clean, interactive to-do list app for planning daily tasks —
+                add, complete and delete tasks with ease.
+              </p>
+              <div class="project-meta">
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    <rect width="20" height="14" x="2" y="6" rx="2" /></svg
+                  >Personal Project</span
+                >
+                
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M8 2v4" />
+                    <path d="M16 2v4" />
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <path d="M3 10h18" /></svg
+                  >2026</span
+                >
+              </div>
+              <div class="project-links">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-primary js-open-modal"
+                >
+                  Live Demo
+                </button>
+                <a
+                  href="https://github.com/blissjuli"
+                  class="btn btn-sm btn-outline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >GitHub</a
+                >
+                <button class="btn btn-sm btn-ghost js-open-modal">
+                  Case Study
+                </button>
+              </div>
+            </div>
+          </article>
+
+          
+          <article
+            class="project-card glass tilt"
+            data-category="Fashion"
+            data-project="p3"
+            data-reveal
+            data-delay="0.1"
+          >
+            
+            <div class="project-media">
+              <img
+                src="image/fashion-boutique.jpg"
+                alt="Bliss Juli fashion website photo"
+                loading="lazy"
+                data-src="image/fashion-boutique.jpg"
+              />
+              <div class="project-media-fallback">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect width="16" height="20" x="4" y="2" rx="2" ry="2" />
+                  <path d="M9 22v-4h6v4" />
+                  <path d="M8 6h.01" />
+                  <path d="M16 6h.01" />
+                  <path d="M12 6h.01" />
+                  <path d="M12 10h.01" />
+                  <path d="M12 14h.01" />
+                  <path d="M16 10h.01" />
+                  <path d="M16 14h.01" />
+                  <path d="M8 10h.01" />
+                  <path d="M8 14h.01" />
+                </svg>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Bliss Juli Fashion Website</h3>
+              <p class="project-desc">
+                A premium fashion brand website for Bliss Juli Limited —
+                showcasing custom clothing and style services.
+              </p>
+              <div class="project-meta">
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    <rect width="20" height="14" x="2" y="6" rx="2" /></svg
+                  >Bliss Juli Limited</span
+                >
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M8 2v4" />
+                    <path d="M16 2v4" />
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <path d="M3 10h18" /></svg
+                  >2026</span
+                >
+              </div>
+              <div class="project-links">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-primary js-open-modal"
+                >
+                  Live Demo
+                </button>
+                <a
+                  href="https://github.com/blissjuli"
+                  class="btn btn-sm btn-outline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >GitHub</a
+                >
+                <button class="btn btn-sm btn-ghost js-open-modal">
+                  Case Study
+                </button>
+              </div>
+            </div>
+          </article>
+
+          
+          <article
+            class="project-card glass tilt"
+            data-category="Bakery"
+            data-project="p4"
+            data-reveal
+            data-delay="0.2"
+          >
+            
+            <div class="project-media">
+              <img
+                src="image/cakes-pastries.jpg"
+                alt="Custom cakes and pastries photo"
+                loading="lazy"
+                data-src="image/cakes-pastries.jpg"
+              />
+              <div class="project-media-fallback">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"
+                  />
+                  <path d="M6 17h12" />
+                </svg>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Custom Cakes &amp; Pastries</h3>
+              <p class="project-desc">
+                Freshly baked celebration cakes and pastries, beautifully
+                decorated — via Bliss Juli Limited.
+              </p>
+              <div class="project-meta">
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    <rect width="20" height="14" x="2" y="6" rx="2" /></svg
+                  >Bliss Juli Limited</span
+                >
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M8 2v4" />
+                    <path d="M16 2v4" />
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <path d="M3 10h18" /></svg
+                  >2026</span
+                >
+              </div>
+              <div class="project-links">
+                <a href="#contact" class="btn btn-sm btn-primary">Order Now</a>
+                <button class="btn btn-sm btn-ghost js-open-modal">
+                  Case Study
+                </button>
+              </div>
+            </div>
+          </article>
+
+          
+          <article
+            class="project-card glass tilt"
+            data-category="Frontend"
+            data-project="p5"
+            data-reveal
+          >
+            
+            <div class="project-media">
+              <img
+                src="image/portfolio-hero.jpg"
+                alt="Personal portfolio website art"
+                loading="lazy"
+                data-src="image/portfolio-hero.jpg"
+              />
+              <div class="project-media-fallback">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+                  />
+                  <path d="M20 3v4" />
+                  <path d="M22 5h-4" />
+                </svg>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Personal Portfolio Website</h3>
+              <p class="project-desc">
+                This website — my personal portfolio, built with pure HTML, CSS
+                and JavaScript to showcase my work.
+              </p>
+              <div class="project-meta">
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    <rect width="20" height="14" x="2" y="6" rx="2" /></svg
+                  >Personal Project</span
+                >
+                <span class="pm-item"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M8 2v4" />
+                    <path d="M16 2v4" />
+                    <rect width="18" height="18" x="3" y="4" rx="2" />
+                    <path d="M3 10h18" /></svg
+                  >2026</span
+                >
+              </div>
+              <div class="project-links">
+                <a href="#home" class="btn btn-sm btn-primary">Live Demo</a>
+                <a
+                  href="https://github.com/blissjuli"
+                  class="btn btn-sm btn-outline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >GitHub</a
+                >
+                <button class="btn btn-sm btn-ghost js-open-modal">
+                  Case Study
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="experience">
+        <span class="section-tag central" data-reveal>JOURNEY</span>
+        <h2 class="section-title" data-reveal>
+          Work <span class="gradient-text">Experience</span>
+        </h2>
+
+        <div class="timeline">
+          
+          <div class="timeline-item" data-reveal="left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass">
+              <div class="timeline-head">
+                
+                <h3>Full Stack Developer</h3>
+                <span class="timeline-date">2025 — Present</span>
+              </div>
+              
+              <p class="timeline-company">Personal Projects &amp; Freelance</p>
+              
+              <p>
+                Building complete web applications end-to-end — modern
+                frontends, robust backends and well-structured databases.
+              </p>
+              
+              <ul class="timeline-achievements">
+                <li>Designed and deployed full stack apps on Vercel.</li>
+                <li>
+                  Built REST APIs, auth systems and responsive interfaces.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-reveal="left" data-delay="0.1">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass">
+              <div class="timeline-head">
+                <h3>Fashion Designer</h3>
+                <span class="timeline-date">2025 — Present</span>
+              </div>
+              <p class="timeline-company">Bliss Juli Limited</p>
+              <p>
+                Designing and sewing custom outfits — from everyday wear to
+                bridal and traditional attire — with premium fabrics and clean
+                finishing.
+              </p>
+              <ul class="timeline-achievements">
+                <li>
+                  Created 10+ custom outfits with a loyal, returning clientele.
+                </li>
+                <li>
+                  Built a reputation for perfect fits and on-time delivery.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-item" data-reveal="left" data-delay="0.2">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card glass">
+              <div class="timeline-head">
+                <h3>Baker</h3>
+                <span class="timeline-date">2023 — Present</span>
+              </div>
+              <p class="timeline-company">Bliss Juli Limited</p>
+              <p>
+                Baking cakes, pastries and party treats for birthdays, weddings
+                and corporate celebrations.
+              </p>
+              <ul class="timeline-achievements">
+                <li>
+                  Baked 10+ custom celebration cakes with glowing reviews.
+                </li>
+                <li>Known for beautifully decorated, freshly baked treats.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="education">
+        <span class="section-tag central" data-reveal>LEARNING</span>
+        <h2 class="section-title" data-reveal>
+          My <span class="gradient-text">Education</span>
+        </h2>
+
+        <div class="edu-grid">
+          <article class="edu-card glass tilt" data-reveal>
+            <div class="edu-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m16 18 6-6-6-6" />
+                <path d="m8 6-6 6 6 6" />
+              </svg>
+            </div>
+            
+            <h3>Web Development</h3>
+            
+            <p class="edu-cert">
+              Software Development &amp; Engineering Courses
+            </p>
+            <span class="edu-year">2025 — Present</span>
+            
+            <ul class="edu-courses">
+              <li>HTML, CSS &amp; JavaScript</li>
+              <li>Node.js, Express &amp; Python</li>
+              <li>Databases &amp; Deployment</li>
+            </ul>
+          </article>
+
+          <article class="edu-card glass tilt" data-reveal data-delay="0.1">
+            <div class="edu-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="6" cy="6" r="3" />
+                <path d="M8.12 8.12 12 12" />
+                <path d="M20 4 8.12 15.88" />
+                <circle cx="6" cy="18" r="3" />
+                <path d="M14.8 14.8 20 20" />
+              </svg>
+            </div>
+            
+            <h3>Tailoring &amp; Fashion School</h3>
+            
+            <p class="edu-cert">Fashion Design &amp; Tailoring</p>
+            <span class="edu-year">2024 — 2026</span>
+            
+            <ul class="edu-courses">
+              <li>Pattern Making &amp; Cutting</li>
+              <li>Machine &amp; Hand Sewing</li>
+              <li>Garment Finishing</li>
+            </ul>
+          </article>
+
+          <article class="edu-card glass tilt" data-reveal data-delay="0.2">
+            <div class="edu-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"
+                />
+                <path d="M6 17h12" />
+              </svg>
+            </div>
+            <h3>Baking &amp; Pastry Training</h3>
+            <p class="edu-cert">Cake &amp; Pastry</p>
+            <span class="edu-year">2023 — Present</span>
+            <ul class="edu-courses">
+              <li>Cake Baking &amp; Decoration</li>
+              <li>Pastry &amp; Doughs</li>
+              <li>Food Hygiene &amp; Safety</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="certifications">
+        <span class="section-tag central" data-reveal>PROOF OF WORK</span>
+        <h2 class="section-title" data-reveal>
+          Certi<span class="gradient-text">fications</span>
+        </h2>
+
+        <div class="cert-grid">
+          <article class="cert-card glass tilt" data-reveal>
+            
+            <div class="cert-media">
+              <div class="cert-ph">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"
+                  />
+                  <path d="m9 12 2 2 4-4" /></svg
+                >Certificate Image
+              </div>
+            </div>
+            <div class="cert-body">
+              <h3>Web Development</h3>
+              <p class="cert-issuer">
+                Issued by — Software Development Courses
+              </p>
+              <span class="cert-date"
+                ><svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M8 2v4" />
+                  <path d="M16 2v4" />
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <path d="M3 10h18" /></svg
+                >2025</span
+              >
+              
+              <a
+                href="cv/Blaise-Chiamaka-CV.pdf"
+                class="btn btn-sm btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View Certificate ↗</a
+              >
+            </div>
+          </article>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="testimonials">
+        <span class="section-tag central" data-reveal>LOVE NOTES</span>
+        <h2 class="section-title" data-reveal>
+          What Clients <span class="gradient-text">Say</span>
+        </h2>
+
+        <div
+          class="testi-slider"
+          id="testiSlider"
+          data-reveal
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Client testimonials"
+          aria-live="polite"
+        >
+          <div class="testi-track" id="testiTrack">
+            
+            <figure class="testi-slide">
+              
+              <div class="testi-avatar">DO</div>
+              <figcaption>
+                <div class="testi-stars">★★★★★</div>
+                
+                <blockquote>
+                  "Blaise built my business website from scratch — fast, clean
+                  and beautiful on mobile. She explained everything and
+                  delivered exactly what I asked for."
+                </blockquote>
+                <p class="testi-name">David O.</p>
+                <p class="testi-company">Business Owner — Website Project</p>
+              </figcaption>
+            </figure>
+            
+            <figure class="testi-slide">
+              <div class="testi-avatar">NC</div>
+              <figcaption>
+                <div class="testi-stars">★★★★★</div>
+                <blockquote>
+                  "Blaise made my wedding gown and it was exactly what I dreamed
+                  of — the fitting was perfect and the finishing was so clean.
+                  She's a true artist!"
+                </blockquote>
+                <p class="testi-name">Ngozi C.</p>
+                <p class="testi-company">Bride — Wedding Gown &amp; Gele</p>
+              </figcaption>
+            </figure>
+            
+            <figure class="testi-slide">
+              <div class="testi-avatar">KE</div>
+              <figcaption>
+                <div class="testi-stars">★★★★★</div>
+                <blockquote>
+                  "She baked my daughter's birthday cake and it was the star of
+                  the party — delicious and beautifully decorated. Highly
+                  recommended!"
+                </blockquote>
+                <p class="testi-name">Kelechi E.</p>
+                <p class="testi-company">Birthday Cake Client</p>
+              </figcaption>
+            </figure>
+            
+            <figure class="testi-slide">
+              <div class="testi-avatar">AO</div>
+              <figcaption>
+                <div class="testi-stars">★★★★★</div>
+                <blockquote>
+                  "The agbada and native set she made for me was sharp! Great
+                  measurements, on time, and the embroidery was top quality. I
+                  always come back."
+                </blockquote>
+                <p class="testi-name">Ada O.</p>
+                <p class="testi-company">Customer, Traditional Attire</p>
+              </figcaption>
+            </figure>
+            
+            <figure class="testi-slide">
+              <div class="testi-avatar">SO</div>
+              <figcaption>
+                <div class="testi-stars">★★★★★</div>
+                <blockquote>
+                  "From planning to delivery, everything ran smoothly. She's
+                  professional, creative and genuinely cares about the result —
+                  I'll work with her again."
+                </blockquote>
+                <p class="testi-name">Samuel O.</p>
+                <p class="testi-company">Freelance Client</p>
+              </figcaption>
+            </figure>
+          </div>
+          <button
+            class="testi-arrow prev"
+            id="testiPrev"
+            aria-label="Previous testimonial"
+          >
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+          <button
+            class="testi-arrow next"
+            id="testiNext"
+            aria-label="Next testimonial"
+          >
+            <svg
+              class="icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+          <div class="testi-dots" id="testiDots"></div>
+        </div>
+      </section>
+
+      
+      
+      <section class="logos" aria-label="Clients and brands I have worked with">
+        <div class="marquee">
+          <div class="marquee-track">
+            
+            <span class="marquee-item">✦ TechNest</span>
+            <span class="marquee-item">✦ Kaza Boutique</span>
+            <span class="marquee-item">✦ Royal Occasions</span>
+            <span class="marquee-item">✦ Adesua Events</span>
+            <span class="marquee-item">✦ Bliss Juli Limited</span>
+            <span class="marquee-item">✦ Vercel</span>
+            <span class="marquee-item">✦ GitHub</span>
+            
+            <span class="marquee-item">✦ TechNest</span>
+            <span class="marquee-item">✦ Kaza Boutique</span>
+            <span class="marquee-item">✦ Royal Occasions</span>
+            <span class="marquee-item">✦ Adesua Events</span>
+            <span class="marquee-item">✦ Bliss Juli Limited</span>
+            <span class="marquee-item">✦ Vercel</span>
+            <span class="marquee-item">✦ GitHub</span>
+          </div>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="tools">
+        <span class="section-tag central" data-reveal>STACK</span>
+        <h2 class="section-title" data-reveal>
+          Tools I <span class="gradient-text">Master</span>
+        </h2>
+        <div class="tech-grid" data-reveal>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #1E6FFF, #2563EB)"
+          >
+            <span>HTML</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #60A5FA, #1E6FFF)"
+          >
+            <span>CSS</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #2563EB, #1E6FFF)"
+          >
+            <span>JavaScript</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #1E6FFF, #2563EB)"
+          >
+            <span>Node.js</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #60A5FA, #1E6FFF)"
+          >
+            <span>Python</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #2563EB, #1E6FFF)"
+          >
+            <span>Django</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #1E6FFF, #2563EB)"
+          >
+            <span>MySQL</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #60A5FA, #1E6FFF)"
+          >
+            <span>MongoDB</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #2563EB, #1E6FFF)"
+          >
+            <span>Supabase</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #1E6FFF, #2563EB)"
+          >
+            <span>Firebase</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #60A5FA, #1E6FFF)"
+          >
+            <span>Git &amp; GitHub</span>
+          </div>
+          <div
+            class="tech-chip"
+            style="--g: linear-gradient(135deg, #2563EB, #1E6FFF)"
+          >
+            <span>Vercel</span>
+          </div>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="process">
+        <span class="section-tag central" data-reveal>HOW I WORK</span>
+        <h2 class="section-title" data-reveal>
+          Work <span class="gradient-text">Process</span>
+        </h2>
+        <div class="process-grid">
+          <div class="process-step glass" data-reveal>
+            <span class="step-num">01</span>
+            <h3>Discovery</h3>
+            <p>Understanding your goals, audience and vision.</p>
+          </div>
+          <div class="process-step glass" data-reveal data-delay="0.05">
+            <span class="step-num">02</span>
+            <h3>Planning</h3>
+            <p>Mapping features, structure, database and timeline.</p>
+          </div>
+          <div class="process-step glass" data-reveal data-delay="0.1">
+            <span class="step-num">03</span>
+            <h3>Design</h3>
+            <p>Crafting a premium, modern and responsive interface.</p>
+          </div>
+          <div class="process-step glass" data-reveal data-delay="0.15">
+            <span class="step-num">04</span>
+            <h3>Development</h3>
+            <p>Building the frontend, backend and integrations.</p>
+          </div>
+          <div class="process-step glass" data-reveal data-delay="0.2">
+            <span class="step-num">05</span>
+            <h3>Testing</h3>
+            <p>Checking responsiveness, accessibility and performance.</p>
+          </div>
+          <div class="process-step glass" data-reveal data-delay="0.25">
+            <span class="step-num">06</span>
+            <h3>Deployment</h3>
+            <p>Launching your project live on the web.</p>
+          </div>
+          <div class="process-step glass" data-reveal data-delay="0.3">
+            <span class="step-num">07</span>
+            <h3>Handover</h3>
+            <p>Clean code, clear documentation and training.</p>
+          </div>
+          <div class="process-step glass" data-reveal data-delay="0.35">
+            <span class="step-num">08</span>
+            <h3>Support</h3>
+            <p>Ongoing care, updates and improvements.</p>
+          </div>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="achievements">
+        <span class="section-tag central" data-reveal>MILESTONES</span>
+        <h2 class="section-title" data-reveal>
+          My <span class="gradient-text">Achievements</span>
+        </h2>
+        <div class="ach-grid">
+          <div class="ach-card glass" data-reveal>
+            <div class="ach-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m16 18 6-6-6-6" />
+                <path d="m8 6-6 6 6 6" />
+              </svg>
+            </div>
+            <h3 class="count" data-target="4">0</h3>
+            <p>Projects Built</p>
+          </div>
+          <div class="ach-card glass" data-reveal data-delay="0.05">
+            <div class="ach-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+                <path d="M4 22h16" />
+                <path
+                  d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"
+                />
+                <path
+                  d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"
+                />
+                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+              </svg>
+            </div>
+            <h3 class="count" data-target="2">0</h3>
+            <p>Awards Won</p>
+          </div>
+          <div class="ach-card glass" data-reveal data-delay="0.1">
+            <div class="ach-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"
+                />
+              </svg>
+            </div>
+            <h3 class="count" data-target="10">0</h3>
+            <p>Outfits Created</p>
+          </div>
+          <div class="ach-card glass" data-reveal data-delay="0.15">
+            <div class="ach-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"
+                />
+                <path d="M6 17h12" />
+              </svg>
+            </div>
+            <h3 class="count" data-target="10">0</h3>
+            <p>Cakes Baked</p>
+          </div>
+          <div class="ach-card glass" data-reveal data-delay="0.2">
+            <div class="ach-icon">
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"
+                />
+                <path d="m9 12 2 2 4-4" />
+              </svg>
+            </div>
+            <h3 class="count" data-target="1">0</h3>
+            <p>Certificates</p>
+          </div>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="blog">
+        <span class="section-tag central" data-reveal>INSIGHTS</span>
+        <h2 class="section-title" data-reveal>
+          Latest <span class="gradient-text">Tips &amp; Stories</span>
+        </h2>
+        <div class="blog-grid">
+          <article class="blog-card glass tilt" data-reveal>
+            
+            <div class="blog-media">
+              <div class="cert-ph">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="m16 18 6-6-6-6" />
+                  <path d="m8 6-6 6 6 6" /></svg
+                >Web Dev
+              </div>
+            </div>
+            <div class="blog-body">
+              <span class="blog-date"
+                ><svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M8 2v4" />
+                  <path d="M16 2v4" />
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <path d="M3 10h18" /></svg
+                >Jun 2026</span
+              >
+              <h3>Building Your First Full Stack App: A Simple Roadmap</h3>
+              <p>
+                From idea to deployed product — the exact steps I follow for
+                every project…
+              </p>
+              <button
+                type="button"
+                class="service-link js-open-article"
+                data-article="0"
+              >
+                Read More →
+              </button>
+            </div>
+          </article>
+          <article class="blog-card glass tilt" data-reveal data-delay="0.1">
+            <div class="blog-media">
+              <div class="cert-ph">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"
+                  /></svg
+                >Style &amp; Tech
+              </div>
+            </div>
+            <div class="blog-body">
+              <span class="blog-date"
+                ><svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M8 2v4" />
+                  <path d="M16 2v4" />
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <path d="M3 10h18" /></svg
+                >Apr 2026</span
+              >
+              <h3>Running a Creative Business with Digital Tools</h3>
+              <p>
+                How I manage Bliss Juli Limited — bookings, payments and
+                marketing made easy…
+              </p>
+              <button
+                type="button"
+                class="service-link js-open-article"
+                data-article="1"
+              >
+                Read More →
+              </button>
+            </div>
+          </article>
+          <article class="blog-card glass tilt" data-reveal data-delay="0.2">
+            <div class="blog-media">
+              <div class="cert-ph">
+                <svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"
+                  />
+                  <path d="M6 17h12" /></svg
+                >Baking
+              </div>
+            </div>
+            <div class="blog-body">
+              <span class="blog-date"
+                ><svg
+                  class="icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M8 2v4" />
+                  <path d="M16 2v4" />
+                  <rect width="18" height="18" x="3" y="4" rx="2" />
+                  <path d="M3 10h18" /></svg
+                >Feb 2026</span
+              >
+              <h3>Choosing the Perfect Cake for Your Celebration</h3>
+              <p>
+                Flavours, sizes and designs — a quick guide to ordering your
+                dream cake…
+              </p>
+              <button
+                type="button"
+                class="service-link js-open-article"
+                data-article="2"
+              >
+                Read More →
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      
+      
+      <section class="section" id="contact">
+        <span class="section-tag central" data-reveal>SAY HELLO</span>
+        <h2 class="section-title" data-reveal>
+          Let's Create Something
+          <span class="gradient-text">Beautiful &amp; Delicious</span>
+        </h2>
+
+        <div class="contact-grid">
+          
+          <form
+            class="contact-form glass"
+            id="contactForm"
+            data-reveal="left"
+            novalidate
+            action="https://formsubmit.co/chidiblaise2023@gmail.com"
+            method="POST"
+          >
+            
+            <input
+              type="hidden"
+              name="_subject"
+              value="New message from Bliss Juli's portfolio"
+            />
+            <input type="hidden" name="_captcha" value="false" />
+            <div class="form-group">
+              <label for="cName">Name</label>
+              <input
+                type="text"
+                id="cName"
+                name="name"
+                placeholder="Your name"
+                required
+                autocomplete="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="cEmail">Email</label>
+              <input
+                type="email"
+                id="cEmail"
+                name="email"
+                placeholder="you@email.com"
+                required
+                autocomplete="email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="cSubject">Subject</label>
+              <input
+                type="text"
+                id="cSubject"
+                name="subject"
+                placeholder="Outfit / event inquiry…"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="cMessage">Message</label>
+              <textarea
+                id="cMessage"
+                name="message"
+                rows="5"
+                placeholder="Tell me about the outfit or event you need…"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-block btn-magnetic"
+              data-ripple
+            >
+              <svg
+                class="icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg
+              ><span class="btn-label">Send Message</span>
+            </button>
+            <p class="form-note" id="formNote" role="status" hidden></p>
+          </form>
+
+          
+          <aside class="contact-info" data-reveal="right" data-delay="0.1">
+            <div class="contact-socials">
+              
+              <a
+                href="https://www.facebook.com/profile.php?id=61580674795761"
+                class="social-btn"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.03 4.39 11.03 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.25h3.32l-.53 3.49h-2.79V24C19.61 23.1 24 18.1 24 12.07z"
+                  /></svg
+                ><span>Facebook</span></a
+              >
+              <a
+                href="https://www.instagram.com/blissjuliluxury"
+                class="social-btn"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63a5.9 5.9 0 0 0-2.13 1.39A5.9 5.9 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.39 2.13a5.9 5.9 0 0 0 2.13 1.39c.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.39 5.9 5.9 0 0 0 1.39-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.39-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.15A4 4 0 1 1 16 12a4 4 0 0 1-4 4zm7.85-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"
+                  /></svg
+                ><span>Instagram</span></a
+              >
+              <a
+                href="https://x.com/Blissjuliluxury"
+                class="social-btn"
+                aria-label="Twitter / X"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"
+                  /></svg
+                ><span>Twitter / X</span></a
+              >
+              
+              <a
+                href="https://wa.me/2347037829449"
+                class="social-btn"
+                aria-label="WhatsApp"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.11 3.22 5.1 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zm-5.47 7.87h-.01a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.72.98 1-3.63-.24-.37a9.84 9.84 0 1 1 8.33 4.6zm8.44-18.29A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L0 24l6.3-1.65a11.9 11.9 0 0 0 5.74 1.46h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.18-1.24-6.16-3.49-8.41z"
+                  /></svg
+                ><span>WhatsApp</span></a
+              >
+            </div>
+
+            <ul class="contact-list">
+              
+              <li>
+                <span class="cl-icon"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg
+                ></span>
+                <div>
+                  <strong>Email</strong
+                  ><a href="mailto:chidiblaise2023@gmail.com"
+                    >chidiblaise2023@gmail.com</a
+                  >
+                </div>
+              </li>
+              
+              <li>
+                <span class="cl-icon"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                    /></svg
+                ></span>
+                <div>
+                  <strong>Phone</strong
+                  ><a href="tel:+2347037829449">+234 703 782 9449</a>
+                </div>
+              </li>
+              
+              <li>
+                <span class="cl-icon"
+                  ><svg
+                    class="icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
+                    />
+                    <circle cx="12" cy="10" r="3" /></svg
+                ></span>
+                <div>
+                  <strong>Location</strong><span>Aba, Abia State, Nigeria</span>
+                </div>
+              </li>
+            </ul>
+          </aside>
+        </div>
+
+        
+        <div class="map-wrap" data-reveal>
+          <div
+            id="contactMap"
+            class="map-canvas"
+            role="application"
+            aria-label="Interactive map"
+          ></div>
+        </div>
+      </section>
+    </main>
+
+    
+    
+    <footer class="footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="logo"
+            ><span class="logo-mark">✦</span
+            ><span class="logo-text"
+              >Bliss<span class="logo-dot">.</span></span
+            ></a
+          >
+          
+          <p>
+            Fashion designer & caterer creating stunning custom outfits and
+            delicious event catering from Aba, Nigeria.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Services</h4>
+          <a href="#services">Baking &amp; Small Chops</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Newsletter</h4>
+          <p>Get style tips and menu ideas. No spam.</p>
+          
+          <form class="newsletter" id="newsletterForm">
+            <input
+              type="email"
+              id="nlEmail"
+              placeholder="your@email.com"
+              required
+              aria-label="Email for newsletter"
+            />
+            <button type="submit" class="btn btn-primary btn-sm" data-ripple>
+              Join
+            </button>
+          </form>
+          <p class="form-note" id="nlNote" role="status" hidden></p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © <span id="year">2026</span> Bliss Juli's Limitted. All rights
+          reserved.
+        </p>
+        <div class="footer-socials">
+          
+          <a
+            href="https://www.facebook.com/profile.php?id=61580674795761"
+            aria-label="Facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+            >FB</a
+          >
+          <a
+            href="https://www.instagram.com/blissjuliluxury"
+            aria-label="Instagram"
+            target="_blank"
+            rel="noopener noreferrer"
+            >IG</a
+          >
+          <a
+            href="https://x.com/Blissjuliluxury"
+            aria-label="X"
+            target="_blank"
+            rel="noopener noreferrer"
+            >X</a
+          >
+        </div>
+      </div>
+
+      
+      <div class="typewriter-wrapper">
+        <p id="typewriter"></p>
+      </div>
+
+      
+      <audio id="typingSound" src="typing_slow.wav"></audio>
+    </footer>
+
+    
+    
+    
+    <div
+      class="modal"
+      id="articleModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="articleTitle"
+      hidden
+    >
+      <div class="modal-backdrop js-close-article"></div>
+      <div class="modal-card">
+        <button class="modal-close js-close-article" aria-label="Close article">
+          <svg
+            class="icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+        <div class="modal-media" id="articleMedia"></div>
+        <div class="modal-body">
+          <span class="modal-category" id="articleTag"></span>
+          <h3 id="articleTitle"></h3>
+          <div class="modal-meta" id="articleMeta"></div>
+          <div class="article-content" id="articleBody"></div>
+          <div class="modal-cta" id="articleCta"></div>
+        </div>
+      </div>
+    </div>
+
+    
+    
+    
+    <div
+      class="modal"
+      id="projectModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+      hidden
+    >
+      <div class="modal-backdrop js-close-modal"></div>
+      <div class="modal-card">
+        <button class="modal-close js-close-modal" aria-label="Close modal">
+          <svg
+            class="icon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+        <div class="modal-media" id="modalMedia"></div>
+        <div class="modal-body">
+          <span class="modal-category" id="modalCategory"></span>
+          <h3 id="modalTitle"></h3>
+          <div class="modal-meta" id="modalMeta"></div>
+
+          <section class="modal-sec">
+            <h4>Features</h4>
+            <ul id="modalFeatures"></ul>
+          </section>
+          <section class="modal-sec">
+            <h4>Screenshots</h4>
+            <div class="modal-shots" id="modalShots"></div>
+          </section>
+
+          <div class="modal-cta" id="modalCta"></div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div
+      class="shot-viewer"
+      id="shotViewer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image gallery"
+      hidden
+    >
+      <div class="shot-viewer-backdrop shot-close"></div>
+      <button class="shot-nav shot-prev" aria-label="Previous image">
+        <svg
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m15 18-6-6 6-6" />
+        </svg>
+      </button>
+      <button class="shot-nav shot-next" aria-label="Next image">
+        <svg
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="m9 18 6-6-6-6" />
+        </svg>
+      </button>
+      <img class="shot-image" src="" alt="Gallery image" />
+      <button class="shot-close" aria-label="Close gallery">
+        <svg
+          class="icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
+      </button>
+      <span class="shot-count"></span>
+    </div>
+
+    
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <svg
+        class="icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="m5 12 7-7 7 7" />
+        <path d="M12 19V5" />
+      </svg>
+    </button>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="firebase.js"></script>
+    <script src="content.js"></script>
+    <script src="index.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
