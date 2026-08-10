@@ -94,7 +94,6 @@ window.BLISS_CONTENT = (() => {
         client: "Personal Project",
         date: "2026",
         image: "image/love-story-hero.jpg",
-        video: "video/love-story.mp4",
         live: "https://love-web-wheat.vercel.app/",
         github: "https://github.com/blissjuli",
         overview:
@@ -128,7 +127,6 @@ window.BLISS_CONTENT = (() => {
         client: "Personal Project",
         date: "2026",
         image: "image/todo-hero.jpg",
-        video: "video/todo.mp4",
         live: "#",
         github: "https://github.com/blissjuli",
         overview:
@@ -161,7 +159,6 @@ window.BLISS_CONTENT = (() => {
         client: "Bliss Juli Limited",
         date: "2026",
         image: "image/fashion-boutique.jpg",
-        video: "video/fashion.mp4",
         live: "https://blisjuli-luxury-fashion.vercel.app/",
         github: "https://github.com/blissjuli",
         overview:
@@ -231,7 +228,6 @@ window.BLISS_CONTENT = (() => {
         client: "Personal Project",
         date: "2026",
         image: "image/portfolio-hero.jpg",
-        video: "video/portfolio.mp4",
         live: "#",
         github: "https://github.com/blissjuli",
         overview:
