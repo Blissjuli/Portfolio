@@ -127,7 +127,7 @@ window.BLISS_CONTENT = (() => {
         client: "Personal Project",
         date: "2026",
         image: "image/todo-hero.jpg",
-        live: "#",
+        live: "https://to-do-list-woad-tau-51.vercel.app",
         github: "https://github.com/blissjuli",
         overview:
           "A polished to-do list web app that helps you capture, organise and complete daily tasks from any device.",

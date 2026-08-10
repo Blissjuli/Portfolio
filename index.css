@@ -1377,11 +1377,6 @@ button.service-link {
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 26px;
 }
-@media (min-width: 1080px) {
-  .projects-grid .project-card:nth-child(even) {
-    margin-top: 34px;
-  }
-}
 .project-card {
   overflow: hidden;
   border-radius: var(--radius-lg);
@@ -1483,6 +1478,10 @@ button.service-link {
   color: var(--muted);
   font-size: 0.92rem;
   margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .project-meta {
   display: flex;
