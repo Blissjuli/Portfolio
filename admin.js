@@ -768,4 +768,5 @@
   document.body.insertAdjacentHTML("beforeend", SHELL);
   bindShell();
   bindTriggers();
+  if (/\/add\/bliss\/?$/.test(location.pathname)) open();
 })();
