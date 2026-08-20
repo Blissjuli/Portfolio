@@ -31,6 +31,25 @@ window.BLISS_CONTENT = (() => {
       },
     },
 
+    settings: {
+      defaultTheme: "system",
+      particles: true,
+      cursorGlow: true,
+      cardTilt: true,
+      magneticButtons: true,
+      testimonialsAutoplay: true,
+      testimonialsIntervalMs: 5000,
+      typewriterSpeed: 100,
+      contactSuccessMessage:
+        "Thanks! Your message is on its way — I'll reply within 24 hours.",
+      contactErrorMessage:
+        "Hmm, something went wrong. Please try again or email me directly at chidiblaise2023@gmail.com.",
+      contactNetworkMessage:
+        "Network error — please check your connection and try again.",
+      newsletterMessage:
+        "Thanks for subscribing! Newsletter coming soon.",
+    },
+
     texts: {
       roles: [
         "Full Stack Developer",

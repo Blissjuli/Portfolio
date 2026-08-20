@@ -71,6 +71,14 @@
        </select>
      </label>`;
 
+  const checkbox = (path, label, value) =>
+    `<label class="af-field af-field-toggle">
+       <span class="af-label">${label}</span>
+       <input type="checkbox" data-path="${path}" ${
+      value ? "checked" : ""
+    }>
+     </label>`;
+
   
 
   const SHELL = `
@@ -87,6 +95,7 @@
           <button type="button" class="admin-tab" data-tab="projects">Projects</button>
           <button type="button" class="admin-tab" data-tab="blog">Blog</button>
           <button type="button" class="admin-tab" data-tab="testimonials">Testimonials</button>
+          <button type="button" class="admin-tab" data-tab="settings">Settings</button>
         </nav>
         <div class="admin-side-foot">
           <div class="admin-user" id="adminUser" hidden>
@@ -333,12 +342,61 @@
     `;
   }
 
+  function buildSettingsPane() {
+    const s = C.settings;
+    return `
+      ${paneHeading("Settings", "Site behavior and appearance. Save All applies the changes to the live site.")}
+      <div class="af-section">
+        <h3>Appearance</h3>
+        ${select(
+          "settings.defaultTheme",
+          "Default theme (for visitors who haven't chosen)",
+          s.defaultTheme,
+          ["system", "light", "dark"]
+        )}
+        <p class="af-note">Visitors can still override this with the sun/moon button in the nav. "system" follows each visitor's device preference.</p>
+      </div>
+      <div class="af-section">
+        <h3>Effects</h3>
+        <div class="af-grid">
+          ${checkbox("settings.particles", "Floating particles", s.particles)}
+          ${checkbox("settings.cursorGlow", "Cursor glow", s.cursorGlow)}
+          ${checkbox("settings.cardTilt", "Card tilt", s.cardTilt)}
+          ${checkbox("settings.magneticButtons", "Magnetic buttons", s.magneticButtons)}
+        </div>
+      </div>
+      <div class="af-section">
+        <h3>Motion & timing</h3>
+        <div class="af-grid">
+          ${checkbox("settings.testimonialsAutoplay", "Testimonial autoplay", s.testimonialsAutoplay)}
+          ${field("settings.testimonialsIntervalMs", "Autoplay interval (ms)", s.testimonialsIntervalMs, "number")}
+          ${field("settings.typewriterSpeed", "Typewriter speed (ms)", s.typewriterSpeed, "number")}
+        </div>
+      </div>
+      <div class="af-section">
+        <h3>Form messages</h3>
+        ${textarea("settings.contactSuccessMessage", "Contact form — success message", s.contactSuccessMessage, 2)}
+        ${textarea("settings.contactErrorMessage", "Contact form — error message", s.contactErrorMessage, 2)}
+        ${textarea("settings.contactNetworkMessage", "Contact form — network error message", s.contactNetworkMessage, 2)}
+        ${textarea("settings.newsletterMessage", "Newsletter — success message", s.newsletterMessage, 2)}
+      </div>
+      <div class="af-section">
+        <h3>Admin</h3>
+        <div class="af-actions">
+          <button type="button" class="admin-btn" id="adminCopyLink">Copy admin login link</button>
+        </div>
+        <p class="af-note">Copies the direct admin URL (your-domain.com/add/bliss) to your clipboard. The hidden trigger (5 clicks on the footer copyright or Ctrl+Shift+A) still works as usual.</p>
+      </div>
+    `;
+  }
+
   const PANE_BUILDERS = {
     home: buildHomePane,
     services: buildServicesPane,
     projects: buildProjectsPane,
     blog: buildBlogPane,
     testimonials: buildTestimonialsPane,
+    settings: buildSettingsPane,
   };
 
   
@@ -581,6 +639,7 @@
     projects: "object",
     articles: "array",
     testimonials: "array",
+    settings: "object",
   };
 
   function importData(file) {
@@ -643,6 +702,19 @@
     });
 
     $("#adminMain").addEventListener("click", (event) => {
+      const copyBtn = event.target.closest("#adminCopyLink");
+      if (copyBtn) {
+        const url = location.origin + "/add/bliss";
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(url)
+            .then(() => showStatus("Admin login link copied to clipboard."))
+            .catch(() => showStatus("Could not copy — your admin link is: " + url, false));
+        } else {
+          showStatus("Could not copy — your admin link is: " + url, false);
+        }
+        return;
+      }
       const actionBtn = event.target.closest("[data-list-action]");
       if (!actionBtn) return;
       event.preventDefault();

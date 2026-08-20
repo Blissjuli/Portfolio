@@ -210,16 +210,98 @@
   let ARTICLES = [];
   let roleTexts, footerTexts, aboutTexts;
   let textsSignature = "";
+  let SETTINGS = {};
+  let appliedTypingSpeed = CONFIG.TYPING_DEFAULTS.speed;
 
   function refreshData() {
     const c = window.BLISS_CONTENT || {};
     PROJECTS = c.projects || {};
     ARTICLES = c.articles || [];
+    SETTINGS = Object.assign({}, c.settings || {});
     ({ roles: roleTexts, footer: footerTexts, about: aboutTexts } =
       c.texts || {});
     textsSignature = JSON.stringify([roleTexts, footerTexts, aboutTexts]);
   }
   refreshData();
+
+  
+  const THEME_KEY = "blissjuli.theme";
+  let themeTransitionTimer = null;
+
+  const themeToggle = document.getElementById("themeToggle");
+
+  const systemPrefersDark = () =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  const readThemePreference = () => {
+    try {
+      const saved = localStorage.getItem(THEME_KEY);
+      if (saved === "light" || saved === "dark") return saved;
+    } catch (e) {}
+    return null;
+  };
+
+  const resolveDefaultTheme = () => {
+    const setting = SETTINGS.defaultTheme || "system";
+    if (setting === "dark") return "dark";
+    if (setting === "light") return "light";
+    return systemPrefersDark() ? "dark" : "light";
+  };
+
+  const currentTheme = () =>
+    document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+
+  const applyTheme = (theme, animate = false) => {
+    const root = document.documentElement;
+    if (animate) {
+      root.classList.add("theme-transition");
+      clearTimeout(themeTransitionTimer);
+      themeTransitionTimer = setTimeout(
+        () => root.classList.remove("theme-transition"),
+        500
+      );
+    }
+    root.dataset.theme = theme;
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      meta.setAttribute("content", theme === "dark" ? "#0E1420" : "#F5F7FA");
+    }
+    if (themeToggle) {
+      themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+      themeToggle.setAttribute(
+        "aria-label",
+        theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+      );
+    }
+  };
+
+  const syncThemeFromSettings = (animate = false) => {
+    if (readThemePreference()) return;
+    applyTheme(resolveDefaultTheme(), animate);
+  };
+
+  function initializeTheme() {
+    if (themeToggle) {
+      on(themeToggle, "click", () => {
+        const next = currentTheme() === "dark" ? "light" : "dark";
+        try {
+          localStorage.setItem(THEME_KEY, next);
+        } catch (e) {}
+        applyTheme(next, true);
+      });
+    }
+
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const onSystemChange = () => {
+      if ((SETTINGS.defaultTheme || "system") === "system") {
+        applyTheme(resolveDefaultTheme(), true);
+      }
+    };
+    if (mq.addEventListener) mq.addEventListener("change", onSystemChange);
+    else if (mq.addListener) mq.addListener(onSystemChange);
+
+    applyTheme(currentTheme());
+  }
 
   
   const SERVICE_CATEGORIES = ["Fashion", "Bakery", "Business"];
@@ -470,6 +552,7 @@
 
   function initializeParticles() {
     if (!DOM.particles || reduceMotion) return;
+    if (SETTINGS.particles === false) return;
 
     const isMobile = window.innerWidth < CONFIG.PARTICLE_MOBILE_WIDTH;
     const particleCount = isMobile
@@ -513,7 +596,10 @@
     let isRunning = false;
 
     const loopGlow = () => {
-      if (document.body.classList.contains("admin-open")) {
+      if (
+        document.body.classList.contains("admin-open") ||
+        SETTINGS.cursorGlow === false
+      ) {
         isRunning = false;
         return;
       }
@@ -533,6 +619,7 @@
     };
 
     on(window, "mousemove", (event) => {
+      if (SETTINGS.cursorGlow === false) return;
       targetX = event.clientX;
       targetY = event.clientY;
       if (!isRunning) {
@@ -552,6 +639,7 @@
       boundTilt.add(card);
 
       const onMouseMove = rafThrottle((event) => {
+        if (SETTINGS.cardTilt === false) return;
         const bounds = card.getBoundingClientRect();
         const rotateX =
           ((event.clientX - bounds.left) / bounds.width - 0.5) *
@@ -586,6 +674,7 @@
         boundMagnetic.add(button);
 
         const onMouseMove = rafThrottle((event) => {
+          if (SETTINGS.magneticButtons === false) return;
           const bounds = button.getBoundingClientRect();
           const offsetX =
             (event.clientX - bounds.left - bounds.width / 2) *
@@ -1164,9 +1253,13 @@
 
     startAutoPlay() {
       this.stopAutoPlay();
-      if (!reduceMotion) {
-        this.timer = setInterval(() => this.next(), CONFIG.AUTO_SLIDE_INTERVAL_MS);
-      }
+      const interval =
+        SETTINGS.testimonialsAutoplay === false
+          ? 0
+          : Number(SETTINGS.testimonialsIntervalMs) ||
+            CONFIG.AUTO_SLIDE_INTERVAL_MS;
+      if (reduceMotion || !interval) return;
+      this.timer = setInterval(() => this.next(), interval);
     }
 
     bindEvents() {
@@ -1218,6 +1311,24 @@
     }
   }
 
+  function applyEffectSettings() {
+    if (DOM.particles) {
+      if (SETTINGS.particles === false) {
+        DOM.particles.innerHTML = "";
+      } else if (DOM.particles.children.length === 0) {
+        initializeParticles();
+      }
+    }
+    if (DOM.cursorGlow) {
+      if (SETTINGS.cursorGlow === false) {
+        document.body.classList.remove("has-mouse");
+        DOM.cursorGlow.style.transform = "";
+      } else if (window.matchMedia("(hover: hover)").matches) {
+        document.body.classList.add("has-mouse");
+      }
+    }
+  }
+
   function refreshRenderedContent() {
     refreshData();
     renderSiteInfo();
@@ -1226,7 +1337,12 @@
     renderBlog();
 
     
-    if (typewriterSignature !== textsSignature) {
+    const typingSpeed =
+      Number(SETTINGS.typewriterSpeed) || CONFIG.TYPING_DEFAULTS.speed;
+    if (
+      typewriterSignature !== textsSignature ||
+      typingSpeed !== appliedTypingSpeed
+    ) {
       activeTypewriters.forEach((tw) => tw.destroy());
       activeTypewriters = [];
       initializeTypewriters();
@@ -1239,6 +1355,8 @@
     initializeButtons();
     initializeServiceLinks();
     initializeProjectMedia();
+    applyEffectSettings();
+    syncThemeFromSettings(true);
     if (applyFilter) {
       const activeFilter = select(".filter-btn.active")?.dataset.filter || "all";
       applyFilter(activeFilter);
@@ -1251,6 +1369,9 @@
   
 
   function initializeForms() {
+    const message = (key, fallback) =>
+      String(SETTINGS[key] ?? fallback);
+
     if (DOM.contactForm) {
       on(DOM.contactForm, "submit", async (event) => {
         event.preventDefault();
@@ -1284,22 +1405,28 @@
           if (response.ok) {
             buttonLabel.textContent = "Message Sent";
             if (formNote) {
-              formNote.textContent =
-                "Thanks! Your message is on its way — I'll reply within 24 hours.";
+              formNote.textContent = message(
+                "contactSuccessMessage",
+                "Thanks! Your message is on its way — I'll reply within 24 hours."
+              );
             }
             DOM.contactForm.reset();
           } else {
             buttonLabel.textContent = "Send Message";
             if (formNote) {
-              formNote.textContent =
-                "Hmm, something went wrong. Please try again or email me directly at chidiblaise2023@gmail.com.";
+              formNote.textContent = message(
+                "contactErrorMessage",
+                "Hmm, something went wrong. Please try again or email me directly at chidiblaise2023@gmail.com."
+              );
             }
           }
         } catch (error) {
           buttonLabel.textContent = "Send Message";
           if (formNote) {
-            formNote.textContent =
-              "Network error — please check your connection and try again.";
+            formNote.textContent = message(
+              "contactNetworkMessage",
+              "Network error — please check your connection and try again."
+            );
           }
         }
 
@@ -1318,9 +1445,10 @@
         const email = emailInput ? emailInput.value : "";
         if (DOM.newsletterNote) {
           DOM.newsletterNote.hidden = false;
-          DOM.newsletterNote.textContent =
-            `Thanks ${email ? "for subscribing" : ""}! ` +
-            "Newsletter coming soon. (Add your provider link.)";
+          DOM.newsletterNote.textContent = message(
+            "newsletterMessage",
+            `Thanks ${email ? "for subscribing" : ""}! Newsletter coming soon. (Add your provider link.)`
+          );
         }
         DOM.newsletterForm.reset();
       });
@@ -1512,12 +1640,21 @@
 
   function initializeTypewriters() {
     typewriterSignature = textsSignature;
+    appliedTypingSpeed =
+      Number(SETTINGS.typewriterSpeed) || CONFIG.TYPING_DEFAULTS.speed;
     buildTypewriter(DOM.footerTypewriter, footerTexts, {
       sound: true,
       keepLast: true,
+      speed: appliedTypingSpeed,
     });
-    buildTypewriter(DOM.roleTypewriter, roleTexts, { keepLast: true });
-    buildTypewriter(DOM.aboutTypewriter, aboutTexts, { keepLast: true });
+    buildTypewriter(DOM.roleTypewriter, roleTexts, {
+      keepLast: true,
+      speed: appliedTypingSpeed,
+    });
+    buildTypewriter(DOM.aboutTypewriter, aboutTexts, {
+      keepLast: true,
+      speed: appliedTypingSpeed,
+    });
   }
 
   
@@ -1958,6 +2095,7 @@
       ]);
       refreshData();
       renderContent();
+      syncThemeFromSettings(true);
       window.BLISS_APP = { refresh: refreshRenderedContent };
       initializeNavigation();
       initializeScrollEffects();
@@ -1978,6 +2116,7 @@
       initializeProjectMedia();
       initializeLiveMap();
       initializeTypewriters();
+      initializeTheme();
     },
   };
 

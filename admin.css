@@ -17,6 +17,20 @@
 }
 body.admin-open {
   overflow: hidden;
+  --bg: #F5F7FA;
+  --bg-2: #EBEFF6;
+  --card: #FFFFFF;
+  --text: #1A1A2E;
+  --muted: #2563EB;
+  --glass: rgba(255, 255, 255, 0.6);
+  --glass-strong: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(26, 26, 46, 0.1);
+  --primary: #1E6FFF;
+  --gold: #3B5FE0;
+  --grad-primary: linear-gradient(135deg, #1E6FFF, #2563EB);
+  --glow-violet: rgba(30, 111, 255, 0.16);
+  --glow-gold: rgba(59, 95, 224, 0.12);
+  color-scheme: light;
 }
 
 .admin-shell {
@@ -231,6 +245,41 @@ body.admin-open {
   outline: none;
   border-color: #1E6FFF;
   box-shadow: 0 0 0 3px rgba(30, 111, 255, 0.18);
+}
+.af-field-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #FFFFFF;
+  border: 1px solid rgba(26, 26, 46, 0.12);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.af-field-toggle:hover {
+  border-color: rgba(30, 111, 255, 0.5);
+}
+.af-field-toggle .af-label {
+  margin-bottom: 0;
+}
+.af-field-toggle input[type="checkbox"] {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  accent-color: #1E6FFF;
+  cursor: pointer;
+}
+.af-note {
+  margin-top: 8px;
+  font-size: 0.76rem;
+  line-height: 1.55;
+  color: var(--muted, #2563EB);
+  opacity: 0.8;
+}
+.af-section .af-note:last-child {
+  margin-bottom: 0;
 }
 
 

@@ -8,10 +8,41 @@
       content="Blaise Chiamaka — Full Stack Developer, Fashion Designer & Baker. Building modern websites and web applications, and founder of Bliss Juli Limited in Nigeria."
     />
     <meta name="author" content="Blaise Chiamaka" />
-    <meta name="theme-color" content="#12161A" />
+    <meta name="theme-color" content="#F5F7FA" />
     <title>
       Blaise Chiamaka — Full Stack Developer | Fashion Designer | Baker
     </title>
+
+    <script>
+      (function () {
+        var theme = null;
+        try {
+          var saved = localStorage.getItem("blissjuli.theme");
+          if (saved === "light" || saved === "dark") {
+            theme = saved;
+          } else {
+            var cached = null;
+            try {
+              cached = JSON.parse(
+                localStorage.getItem("blissjuli.content.v1") || "null"
+              );
+            } catch (e) {}
+            var setting =
+              cached && cached.settings ? cached.settings.defaultTheme : "system";
+            if (setting === "dark") theme = "dark";
+            else if (setting === "light") theme = "light";
+          }
+        } catch (e) {}
+        if (!theme) {
+          theme =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
 
     
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -81,6 +112,44 @@
         </ul>
 
         <a href="#contact" class="btn btn-primary btn-sm nav-cta">Let's Talk</a>
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+        >
+          <svg
+            class="icon-sun"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+            />
+          </svg>
+          <svg
+            class="icon-moon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+            />
+          </svg>
+        </button>
 
         <button
           class="hamburger"
