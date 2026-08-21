@@ -3547,3 +3547,19 @@ figcaption {
     padding-top: 96px;
   }
 }
+
+@media (max-width: 1080px) {
+  .stats-section .stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 720px;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+}
