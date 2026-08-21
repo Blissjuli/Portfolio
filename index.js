@@ -314,6 +314,7 @@
 
   let activeTypewriters = [];
   let typewriterSignature = null;
+  let footerTypewriterRevealed = false;
 
   
 
@@ -1642,11 +1643,31 @@
     typewriterSignature = textsSignature;
     appliedTypingSpeed =
       Number(SETTINGS.typewriterSpeed) || CONFIG.TYPING_DEFAULTS.speed;
-    buildTypewriter(DOM.footerTypewriter, footerTexts, {
-      sound: true,
-      keepLast: true,
-      speed: appliedTypingSpeed,
-    });
+    if (DOM.footerTypewriter) {
+      if (footerTypewriterRevealed || reduceMotion) {
+        buildTypewriter(DOM.footerTypewriter, footerTexts, {
+          sound: true,
+          keepLast: true,
+          speed: appliedTypingSpeed,
+        });
+      } else {
+        const footerTarget =
+          DOM.footerTypewriter.closest(".typewriter-wrapper") ||
+          DOM.footerTypewriter;
+        observeOnce(
+          [footerTarget],
+          () => {
+            footerTypewriterRevealed = true;
+            buildTypewriter(DOM.footerTypewriter, footerTexts, {
+              sound: true,
+              keepLast: true,
+              speed: appliedTypingSpeed,
+            });
+          },
+          { threshold: 0.3 }
+        );
+      }
+    }
     buildTypewriter(DOM.roleTypewriter, roleTexts, {
       keepLast: true,
       speed: appliedTypingSpeed,
