@@ -3298,3 +3298,252 @@ button.service-link {
     opacity: 0;
   }
 }
+
+
+
+
+html {
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+a,
+span,
+li,
+blockquote,
+figcaption {
+  overflow-wrap: break-word;
+}
+
+.contact-list a,
+.contact-list span {
+  word-break: break-word;
+}
+
+.stats-row {
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+}
+.about-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(270px, 100%), 1fr));
+}
+.skills-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+.specialties-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+.projects-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
+.edu-grid,
+.cert-grid,
+.blog-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+}
+.process-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+}
+.ach-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+}
+.contact-socials {
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+}
+.modal-shots {
+  grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+}
+
+.newsletter input {
+  min-width: 0;
+}
+
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+.mobile-menu {
+  height: 100vh;
+  height: 100dvh;
+}
+
+.modal-card {
+  max-height: 88vh;
+  max-height: 88dvh;
+}
+
+@media (max-width: 1240px) {
+  .nav-inner {
+    gap: 14px;
+  }
+  .nav-link {
+    padding: 8px 10px;
+    font-size: 0.88rem;
+  }
+  .nav-link::after {
+    left: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .nav-links,
+  .nav-cta {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .hero-role {
+    justify-content: center;
+  }
+  .fb-1 {
+    left: -2%;
+  }
+  .fb-2 {
+    right: -2%;
+  }
+  .fb-3 {
+    left: -4%;
+  }
+}
+
+@media (hover: none), (max-width: 900px) {
+  .testi-arrow {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 110px 18px 46px;
+  }
+  .hero-inner {
+    gap: 34px;
+  }
+  .hero-name {
+    font-size: clamp(2.3rem, 11vw, 2.8rem);
+  }
+  .timeline {
+    padding-left: 30px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .newsletter input {
+    font-size: 1rem;
+  }
+  .modal {
+    padding: 10px;
+  }
+  .modal-card {
+    width: 100%;
+    max-height: 92vh;
+    max-height: 92dvh;
+  }
+  .modal-media {
+    height: 200px;
+  }
+  .map-canvas {
+    height: 300px;
+  }
+  .shot-nav {
+    width: 44px;
+    height: 44px;
+  }
+  .shot-prev {
+    left: 8px;
+  }
+  .shot-next {
+    right: 8px;
+  }
+  .back-to-top {
+    bottom: 18px;
+    right: 18px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-card,
+  .skill-category,
+  .spec-card,
+  .timeline-card,
+  .edu-card,
+  .process-step {
+    padding: 22px 18px;
+  }
+  .project-body {
+    padding: 20px;
+  }
+  .cert-body,
+  .blog-body {
+    padding: 20px;
+  }
+  .contact-form {
+    padding: 22px 18px;
+  }
+  .modal-body {
+    padding: 24px 18px 30px;
+  }
+  .modal-body h3 {
+    font-size: 1.45rem;
+  }
+  .stat-box {
+    padding: 20px 14px;
+  }
+  .stat-box h3 {
+    font-size: 1.9rem;
+  }
+  .ach-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ach-card {
+    padding: 26px 14px;
+  }
+  .ach-card h3 {
+    font-size: 1.8rem;
+  }
+  .step-num {
+    font-size: 3.2rem;
+  }
+  .testi-slide {
+    padding: 32px 18px;
+  }
+}
+
+@media (max-width: 400px) {
+  .section {
+    padding-inline: 16px;
+  }
+  .hero {
+    padding-inline: 16px;
+  }
+  .nav-inner {
+    padding-inline: 14px;
+  }
+  .nav.scrolled .nav-inner {
+    padding-inline: 14px;
+  }
+  .logo-text {
+    font-size: 1.15rem;
+  }
+  .newsletter {
+    flex-direction: column;
+  }
+  .newsletter .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-height: 540px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding-top: 96px;
+  }
+}
