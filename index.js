@@ -33,8 +33,8 @@
     PARTICLE_COLORS: [
       "var(--primary)",
       "var(--gold)",
-      "var(--blue)",
-      "var(--purple)",
+      "var(--olive-light)",
+      "var(--beige)",
     ],
 
     
@@ -264,7 +264,7 @@
     root.dataset.theme = theme;
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
-      meta.setAttribute("content", theme === "dark" ? "#0E1420" : "#F5F7FA");
+      meta.setAttribute("content", theme === "dark" ? "#1A1B15" : "#F9F9F7");
     }
     if (themeToggle) {
       themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
@@ -1533,7 +1533,7 @@
       .addTo(map);
 
     const pinSvg =
-      '<svg width="34" height="42" viewBox="0 0 34 42" fill="none" aria-hidden="true"><defs><linearGradient id="pinGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1E6FFF"/><stop offset="100%" stop-color="#2563EB"/></linearGradient></defs><path d="M17 1C8.7 1 2 7.7 2 16c0 11.5 15 25 15 25s15-13.5 15-25C32 7.7 25.3 1 17 1z" fill="url(#pinGrad)" stroke="rgba(26,26,46,0.35)" stroke-width="1"/><circle cx="17" cy="16" r="6.5" fill="#fff"/></svg>';
+      '<svg width="34" height="42" viewBox="0 0 34 42" fill="none" aria-hidden="true"><defs><linearGradient id="pinGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6B7558"/><stop offset="100%" stop-color="#7C886B"/></linearGradient></defs><path d="M17 1C8.7 1 2 7.7 2 16c0 11.5 15 25 15 25s15-13.5 15-25C32 7.7 25.3 1 17 1z" fill="url(#pinGrad)" stroke="rgba(0,0,0,0.5)" stroke-width="1"/><circle cx="17" cy="16" r="6.5" fill="#fff"/></svg>';
 
     const marker = L.marker(DEFAULT_COORDS, {
       icon: L.divIcon({

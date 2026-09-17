@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /add/
+Disallow: /admin/
+Disallow: /.env
+Disallow: /.git/
+
+Sitemap: https://blissjuli.com/sitemap.xml
