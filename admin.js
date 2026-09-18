@@ -570,11 +570,7 @@
     } else if (action === "remove-cert" || action === "remove-cv") {
       const key = action === "remove-cert" ? "certificates" : "cvs";
       const list = Array.isArray(C[key]) ? C[key] : [];
-      const item = list[Number(index)];
       list.splice(Number(index), 1);
-      if (item && item.storagePath && FB && FB.deleteFile) {
-        FB.deleteFile(item.storagePath).catch(() => {});
-      }
     }
   }
 
@@ -829,9 +825,6 @@
       }
       if (event.target.closest("#adminCancelUpload")) {
         uploadSequenceCancelled = true;
-        if (activeUploadCancel) {
-          try { activeUploadCancel(); } catch (e) {}
-        }
       }
     });
 
@@ -846,76 +839,110 @@
     });
 
     let uploadSequenceCancelled = false;
-    let activeUploadCancel = null;
 
     async function uploadSequence(kind, files) {
       uploadSequenceCancelled = false;
-      for (const file of files) {
+      for (let i = 0; i < files.length; i++) {
         if (uploadSequenceCancelled) break;
-        await startUpload(kind, file);
+        const ok = await startUpload(kind, files[i], i + 1, files.length);
+        const activeTab = $$(".admin-tab", dash).find((t) => t.classList.contains("active"));
+        if (ok && activeTab) showPane(activeTab.dataset.tab);
       }
     }
 
-    async function startUpload(kind, file) {
+    function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        if (!(file instanceof File) && !(file instanceof Blob)) {
+          reject(new Error("No file."));
+          return;
+        }
+        if (!/^image\//i.test(file.type)) {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = () => reject(new Error("Could not read file."));
+          reader.readAsDataURL(file);
+          return;
+        }
+        const objectUrl = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(objectUrl);
+          const maxDim = 1000;
+          let { width, height } = img;
+          const scale = Math.min(1, maxDim / Math.max(width, height));
+          width = Math.max(1, Math.round(width * scale));
+          height = Math.max(1, Math.round(height * scale));
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL("image/jpeg", 0.75));
+        };
+        img.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          reject(new Error("Could not read image."));
+        };
+        img.src = objectUrl;
+      });
+    }
+
+    const FIRESTORE_DOC_LIMIT = 900000;
+
+    function projectedSize() {
+      return JSON.stringify({
+        certificates: C.certificates,
+        cvs: C.cvs,
+      }).length;
+    }
+
+    async function startUpload(kind, file, seqIndex, seqTotal) {
       const noteEl = $(kind === "cert" ? "#adminCertNote" : "#adminCvNote");
-      if (!FB || !FB.storageAvailable) {
-        if (noteEl) noteEl.textContent = "File storage is unavailable — enable Firebase Storage and publish the storage rules.";
-        showStatus("File storage is not enabled.", false);
-        return;
-      }
-      const user = FB.currentUser ? FB.currentUser() : null;
-      if (!user) {
-        if (noteEl) noteEl.textContent = "Sign in to upload files.";
-        return;
-      }
-      const safeName = String(file.name).replace(/[^\w.\-]+/g, "-");
-      const folder = kind === "cert" ? "certs" : "cvs";
-      const path = "blissjuli/" + folder + "/" + Date.now() + "-" + safeName;
+      const seqText = seqTotal && seqTotal > 1 ? "(" + seqIndex + " of " + seqTotal + ") " : "";
       if (noteEl) {
         noteEl.innerHTML =
-          `<span class="admin-upload-progress">Uploading ${esc(file.name)}… 0%</span>` +
+          `<span class="admin-upload-progress">Processing ${seqText}${esc(file.name)}… compressed and saved directly in your free Firestore plan — no Storage needed</span>` +
           `<button type="button" class="admin-btn admin-btn-small" id="adminCancelUpload">Cancel</button>`;
       }
       try {
-        const { promise, cancel } = FB.uploadFileWithCancel(path, file, (sent, total) => {
-          if (noteEl) {
-            const progress = noteEl.querySelector(".admin-upload-progress");
-            if (progress) {
-              progress.textContent = total
-                ? "Uploading " + esc(file.name) + "… " + Math.round((sent / total) * 100) + "%"
-                : "Uploading " + esc(file.name) + "…";
-            }
-          }
-        });
-        uploadSequenceCancelled = false;
-        activeUploadCancel = cancel;
-        const url = await promise;
-        activeUploadCancel = null;
+        const dataUrl = await fileToDataUrl(file);
+        if (uploadSequenceCancelled) {
+          if (noteEl) noteEl.textContent = "Batch cancelled.";
+          return false;
+        }
+        const baseName = file.name.replace(/\.[^.]+$/, "");
         if (kind === "cert") {
           C.certificates.push({
-            title: file.name.replace(/\.[^.]+$/, ""),
+            title: baseName,
             issuer: "",
             year: "",
             name: file.name,
-            url,
-            storagePath: path,
+            url: dataUrl,
           });
         } else {
           C.cvs.push({
-            label: file.name.replace(/\.[^.]+$/, ""),
+            label: baseName,
             name: file.name,
-            url,
-            storagePath: path,
+            url: dataUrl,
           });
         }
-        showStatus(kind === "cert" ? "Certificate uploaded — click Save All to publish." : "CV uploaded — click Save All to publish.");
-        const activeTab = $$(".admin-tab", dash).find((t) => t.classList.contains("active"));
-        if (activeTab) showPane(activeTab.dataset.tab);
+        const size = projectedSize();
+        if (size > FIRESTORE_DOC_LIMIT) {
+          if (kind === "cert") C.certificates.pop();
+          else C.cvs.pop();
+          const mb = Math.round((FIRESTORE_DOC_LIMIT / 1000000) * 100) / 100;
+          const used = Math.round((size / 1000000) * 10) / 10;
+          if (noteEl) noteEl.textContent = `Skipped "${file.name}" — too large. Firestore's free tier keeps one project doc to ~1MB (now ~${used}MB projected). Use smaller/resized images.`;
+          return false;
+        }
+        showStatus(kind === "cert" ? "Certificate added — click Save All to publish." : "CV added — click Save All to publish.");
+        return true;
       } catch (e) {
-        activeUploadCancel = null;
-        const cancelled =
-          e && (e.code === 1 || String(e.code || e.message || "").toLowerCase().includes("cancel") || String(e.message || "").includes("storage/canceled"));
-        if (noteEl) noteEl.textContent = cancelled ? "Upload cancelled." : "Upload failed — check your connection and storage rules.";
+        uploadSequenceCancelled = false;
+        if (noteEl) noteEl.textContent = "Could not process " + esc(file.name) + " — make sure it is an image (JPG/PNG) or a PDF.";
+        return false;
       }
     }
 
