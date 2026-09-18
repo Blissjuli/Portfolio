@@ -40,6 +40,14 @@
     authError = e;
   }
 
+  let storage = null;
+  let storageError = null;
+  try {
+    storage = firebase.storage();
+  } catch (e) {
+    storageError = e;
+  }
+
   const CONTENT_COLLECTION = "site";
   const CONTENT_DOC = "content";
 
@@ -151,6 +159,8 @@
     available: true,
     authAvailable: !!auth,
     authError,
+    storageAvailable: !!storage,
+    storageError,
     db,
     auth,
     load,
@@ -183,12 +193,51 @@
       }
       return auth.signOut();
     },
+    sendPasswordReset(email) {
+      if (!auth) {
+        return Promise.reject(
+          authError || new Error("Authentication is unavailable.")
+        );
+      }
+      if (!isValidEmail(email)) {
+        return Promise.reject(new Error("auth/invalid-email"));
+      }
+      return auth.sendPasswordResetEmail(email.trim());
+    },
     currentUser() {
       return auth ? auth.currentUser : null;
     },
     onAuth(cb) {
       if (!auth) return () => {};
       return auth.onAuthStateChanged(cb);
+    },
+    uploadFile(path, file, onProgress) {
+      if (!storage) {
+        return Promise.reject(
+          storageError || new Error("File storage is unavailable.")
+        );
+      }
+      if (!file) {
+        return Promise.reject(new Error("No file selected."));
+      }
+      const ref = storage.ref().child(path);
+      const task = ref.put(file);
+      if (typeof onProgress === "function") {
+        task.on("state_changed", (snapshot) => {
+          onProgress(snapshot.bytesTransferred, snapshot.totalBytes);
+        });
+      }
+      return task.then(() => ref.getDownloadURL()).catch((err) => {
+        throw err;
+      });
+    },
+    deleteFile(path) {
+      if (!storage) {
+        return Promise.reject(
+          storageError || new Error("File storage is unavailable.")
+        );
+      }
+      return storage.ref().child(path).delete();
     },
   };
 })();

@@ -297,12 +297,18 @@ body.admin-open {
 }
 .af-card-head {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 14px;
+  align-items: center;
+  gap: 10px;
   padding-bottom: 10px;
+  margin-bottom: 10px;
   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
+}
+.af-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
 }
 .af-card-head strong {
   font-size: 0.95rem;
@@ -448,9 +454,82 @@ body.admin-open {
   border-color: var(--primary, #16A34A);
   box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.22);
 }
+.af-input-wrap {
+  position: relative;
+  display: block;
+}
+.af-input-wrap input {
+  padding-right: 40px;
+}
+.af-input-toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted, #444444);
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.af-input-toggle:hover {
+  color: #15803D;
+  background: rgba(17, 17, 17, 0.05);
+}
+.af-input-toggle[aria-pressed="true"] {
+  color: #15803D;
+}
+.af-input-toggle .admin-key-icon {
+  width: 17px;
+  height: 17px;
+}
+.af-input-toggle .admin-key-slash {
+  display: block;
+}
+.af-input-toggle[aria-pressed="true"] .admin-key-slash {
+  display: none;
+}
+.admin-lock-box input::-ms-reveal,
+.admin-lock-box input::-ms-clear {
+  display: none;
+}
+.admin-lock-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: -4px 0 14px;
+}
+.admin-lock-link {
+  border: 0;
+  background: transparent;
+  padding: 2px 0;
+  font: inherit;
+  font-size: 0.8rem;
+  color: var(--primary, #15803D);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.admin-lock-link:hover {
+  text-decoration: underline;
+}
+.admin-lock-msg.admin-lock-ok {
+  color: #15803D;
+}
 .admin-btn-block {
   width: 100%;
   margin-top: 4px;
+}
+.admin-lock-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+.admin-lock-actions .admin-btn-block {
+  margin-top: 0;
 }
 .admin-lock-msg {
   min-height: 18px;
@@ -631,6 +710,24 @@ body.admin-open {
 [data-theme="dark"] body.admin-open .admin-lock-box input:focus {
   border-color: #4ADE80;
   box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.28);
+}
+
+[data-theme="dark"] body.admin-open .af-input-toggle {
+  color: #A3A3A3;
+}
+
+[data-theme="dark"] body.admin-open .af-input-toggle:hover,
+[data-theme="dark"] body.admin-open .af-input-toggle[aria-pressed="true"] {
+  color: #4ADE80;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] body.admin-open .admin-lock-link {
+  color: #4ADE80;
+}
+
+[data-theme="dark"] body.admin-open .admin-lock-msg.admin-lock-ok {
+  color: #4ADE80;
 }
 
 [data-theme="dark"] body.admin-open .admin-user {

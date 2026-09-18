@@ -104,6 +104,10 @@ window.BLISS_CONTENT = (() => {
       },
     ],
 
+    certificates: [],
+
+    cvs: [],
+
     projects: {
       p1: {
         title: "Love Story Interactive Website",

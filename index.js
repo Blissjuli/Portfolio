@@ -1336,6 +1336,8 @@
     renderServices();
     renderProjects();
     renderBlog();
+    renderCertifications();
+    renderCVs();
 
     
     const typingSpeed =
@@ -2093,12 +2095,75 @@
     }
   }
 
+  const isImageUrl = (url) =>
+    /\.(png|jpe?g|gif|webp|avif|bmp|svg)(\?.*)?$/i.test(String(url || ""));
+
+  function renderCertifications() {
+    const grid = document.querySelector(".cert-grid");
+    const certs = Array.isArray(BLISS.certificates) ? BLISS.certificates : [];
+    if (!grid || !certs.length) return;
+    grid.querySelectorAll("[data-dynamic-cert]").forEach((node) => node.remove());
+    const cards = certs
+      .map(
+        (cert, i) => {
+          const url = cert && cert.url ? cert.url : "#";
+          const title = esc((cert && cert.title) || "Certificate " + (i + 1));
+          const issuer = esc((cert && cert.issuer) || "");
+          const year = esc(cert && cert.year ? String(cert.year) : "");
+          const preview = isImageUrl(url)
+            ? `<img src="${esc(url)}" alt="${esc(title)}" loading="lazy">`
+            : `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h1"/></svg><span class="cert-ph-label">${esc((cert && cert.name) || "PDF")}</span>`;
+          return `
+          <article class="cert-card glass tilt" data-dynamic-cert>
+            <div class="cert-media">
+              <div class="cert-ph">${preview}</div>
+            </div>
+            <div class="cert-body">
+              <h3>${title}</h3>
+              <p class="cert-issuer">Issued by — ${issuer || "—"}</p>
+              ${year ? `<span class="cert-date">${year}</span>` : ""}
+              <a href="${esc(url)}" class="btn btn-sm btn-primary" target="_blank" rel="noopener noreferrer">View Certificate ↗</a>
+            </div>
+          </article>`;
+        }
+      )
+      .join("");
+    grid.insertAdjacentHTML("beforeend", cards);
+  }
+
+  function renderCVs() {
+    const cvs = Array.isArray(BLISS.cvs) ? BLISS.cvs : [];
+    const actions = document.querySelector(".hero-actions");
+    const link = document.querySelector(".hero-actions a[download]");
+    if (!actions) return;
+    actions.querySelectorAll(".js-cv-extra").forEach((node) => node.remove());
+    if (!cvs.length) return;
+    if (link && cvs[0] && cvs[0].url) {
+      link.href = cvs[0].url;
+      if (cvs[0].name) link.setAttribute("download", cvs[0].name);
+    }
+    cvs.slice(1).forEach((cv) => {
+      if (!cv || !cv.url) return;
+      const a = document.createElement("a");
+      a.href = cv.url;
+      a.className = "btn btn-outline btn-magnetic js-cv-extra";
+      a.setAttribute("download", cv.name || "");
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.appendChild(link ? link.querySelector("svg.icon").cloneNode(true) : document.createElement("span"));
+      a.appendChild(document.createTextNode(" " + esc(cv.label || "Download CV")));
+      actions.appendChild(a);
+    });
+  }
+
   function renderContent() {
     renderSiteInfo();
     renderServices();
     renderProjects();
     renderBlog();
     renderTestimonials();
+    renderCertifications();
+    renderCVs();
   }
 
   const App = {

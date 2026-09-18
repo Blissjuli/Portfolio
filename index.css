@@ -1180,10 +1180,7 @@ html {
   font-family: var(--font-head);
   font-size: 2.3rem;
   font-weight: 700;
-  background: var(--grad-title);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold);
   position: relative;
 }
 .stat-box p {
@@ -2080,6 +2077,24 @@ button.service-link {
   background: linear-gradient(135deg, #FFFFFF, #FFFFFF);
   transition: transform 0.6s var(--ease);
 }
+.cert-ph img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cert-ph-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 90%;
+  padding-top: 4px;
+  font-size: 0.7rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .cert-card:hover .cert-ph {
   transform: scale(1.06);
 }
@@ -2334,16 +2349,6 @@ button.service-link {
   border-color: rgba(17, 17, 17, 0.4);
   box-shadow: 0 24px 48px -28px var(--glow-violet);
 }
-.step-num {
-  position: absolute;
-  top: -6px;
-  right: 10px;
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 4.4rem;
-  color: rgba(17, 17, 17, 0.05);
-  line-height: 1;
-}
 .process-step h3 {
   font-family: var(--font-head);
   font-size: 1.15rem;
@@ -2383,10 +2388,7 @@ button.service-link {
 .ach-card h3 {
   font-family: var(--font-head);
   font-size: 2.1rem;
-  background: linear-gradient(120deg, #16A34A, #15803D);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold);
 }
 .ach-card p {
   color: var(--muted);
@@ -3132,12 +3134,6 @@ button.service-link {
 [data-theme="dark"] .testi-dot {
   background: rgba(74, 222, 128, 0.35);
 }
-[data-theme="dark"] .step-num {
-  color: rgba(74, 222, 128, 0.09);
-}
-[data-theme="dark"] .ach-card h3 {
-  background: linear-gradient(120deg, #4ADE80, #86EFAC);
-}
 [data-theme="dark"] .form-group input,
 [data-theme="dark"] .form-group textarea,
 [data-theme="dark"] .newsletter input {
@@ -3291,26 +3287,6 @@ button.service-link {
   position: relative;
   overflow: hidden;
 }
-.section-title::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.4) 50%, transparent 60%);
-  transform: translateX(-130%);
-  animation: title-shimmer 7s var(--ease) 1.2s infinite;
-  pointer-events: none;
-  mix-blend-mode: soft-light;
-}
-@keyframes title-shimmer {
-  0% {
-    transform: translateX(-130%);
-  }
-  55%,
-  100% {
-    transform: translateX(130%);
-  }
-}
-
 
 @property --border-spin {
   syntax: "<angle>";
@@ -3349,7 +3325,6 @@ button.service-link {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-title::after,
   .glass.tilt::after {
     animation: none !important;
   }
@@ -3566,9 +3541,6 @@ figcaption {
   }
   .ach-card h3 {
     font-size: 1.8rem;
-  }
-  .step-num {
-    font-size: 3.2rem;
   }
   .testi-slide {
     padding: 32px 18px;

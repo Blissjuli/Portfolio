@@ -95,6 +95,7 @@
           <button type="button" class="admin-tab" data-tab="projects">Projects</button>
           <button type="button" class="admin-tab" data-tab="blog">Blog</button>
           <button type="button" class="admin-tab" data-tab="testimonials">Testimonials</button>
+          <button type="button" class="admin-tab" data-tab="certs">Certs & CV</button>
           <button type="button" class="admin-tab" data-tab="settings">Settings</button>
         </nav>
         <div class="admin-side-foot">
@@ -132,9 +133,26 @@
           </label>
           <label class="af-field">
             <span class="af-label">Password</span>
-            <input type="password" id="adminLoginPass" autocomplete="current-password" required>
+            <span class="af-input-wrap">
+              <input type="password" id="adminLoginPass" autocomplete="current-password" required>
+              <button type="button" class="af-input-toggle" id="adminTogglePass" aria-pressed="false" aria-label="Show password">
+                <svg class="admin-key-icon" id="adminToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m21 2-9.6 9.6"></path>
+                  <path d="m15.5 7.5 3 3L22 7l-3-3"></path>
+                  <path d="m7.5 15.5 3 3L15 14l-3-3"></path>
+                  <path d="M7.5 11.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9z"></path>
+                  <path class="admin-key-slash" d="M3 21 21 3"></path>
+                </svg>
+              </button>
+            </span>
           </label>
-          <button type="submit" class="admin-btn admin-btn-primary admin-btn-block" id="adminLoginBtn">Sign in</button>
+          <div class="admin-lock-row">
+            <button type="button" class="admin-lock-link" id="adminForgot">Forgot password?</button>
+          </div>
+          <div class="admin-lock-actions">
+            <button type="button" class="admin-btn" id="adminLockCancel">Cancel</button>
+            <button type="submit" class="admin-btn admin-btn-primary admin-btn-block" id="adminLoginBtn">Sign in</button>
+          </div>
           <p class="admin-lock-msg" id="adminLockMsg" role="status"></p>
         </form>
       </div>
@@ -390,12 +408,80 @@
     `;
   }
 
+  function buildCertsPane() {
+    const certs = Array.isArray(C.certificates) ? C.certificates : [];
+    const cvs = Array.isArray(C.cvs) ? C.cvs : [];
+
+    const certCards = certs
+      .map(
+        (cert, i) => `
+        <div class="af-card">
+          <div class="af-card-head">
+            <strong>${esc(cert.title || "Certificate " + (i + 1))}</strong>
+            <div class="af-card-actions">
+              <a href="${esc(cert.url)}" class="admin-btn admin-btn-small" target="_blank" rel="noopener noreferrer">View</a>
+              <button type="button" class="admin-btn admin-btn-small admin-btn-danger" data-list-action="remove-cert" data-index="${i}">Remove</button>
+            </div>
+          </div>
+          <div class="af-grid">
+            ${field(`certificates.${i}.title`, "Title", cert.title)}
+            ${field(`certificates.${i}.issuer`, "Issued by", cert.issuer)}
+            ${field(`certificates.${i}.year`, "Year", cert.year)}
+          </div>
+          <p class="af-note">File: ${esc(cert.name || "")}</p>
+        </div>`
+      )
+      .join("");
+
+    const cvCards = cvs
+      .map(
+        (cv, i) => `
+        <div class="af-card">
+          <div class="af-card-head">
+            <strong>${esc(cv.label || "CV " + (i + 1))}</strong>
+            <div class="af-card-actions">
+              <a href="${esc(cv.url)}" class="admin-btn admin-btn-small" target="_blank" rel="noopener noreferrer">Download</a>
+              <button type="button" class="admin-btn admin-btn-small admin-btn-danger" data-list-action="remove-cv" data-index="${i}">Remove</button>
+            </div>
+          </div>
+          <div class="af-grid">
+            ${field(`cvs.${i}.label`, "Label", cv.label)}
+          </div>
+          <p class="af-note">File: ${esc(cv.name || "")}</p>
+        </div>`
+      )
+      .join("");
+
+    return `
+      ${paneHeading("Certificates & CV", "Upload certificate images/PDFs and CV files. Files go to Firebase Storage; the details publish with Save All.")}
+      <div class="af-section">
+        <h3>Certificates</h3>
+        ${certs.length ? `<div class="af-list">${certCards}</div>` : `<p class="af-note">No certificates uploaded yet.</p>`}
+        <div class="af-actions">
+          <button type="button" class="admin-btn" data-upload="adminCertFile">+ Upload certificate</button>
+        </div>
+        <input type="file" id="adminCertFile" accept="image/*,application/pdf" hidden>
+        <p class="af-note" id="adminCertNote"></p>
+      </div>
+      <div class="af-section">
+        <h3>CVs</h3>
+        ${cvs.length ? `<div class="af-list">${cvCards}</div>` : `<p class="af-note">No CVs uploaded yet.</p>`}
+        <div class="af-actions">
+          <button type="button" class="admin-btn" data-upload="adminCvFile">+ Upload CV</button>
+        </div>
+        <input type="file" id="adminCvFile" accept="application/pdf" hidden>
+        <p class="af-note" id="adminCvNote"></p>
+      </div>
+    `;
+  }
+
   const PANE_BUILDERS = {
     home: buildHomePane,
     services: buildServicesPane,
     projects: buildProjectsPane,
     blog: buildBlogPane,
     testimonials: buildTestimonialsPane,
+    certs: buildCertsPane,
     settings: buildSettingsPane,
   };
 
@@ -481,6 +567,14 @@
       C.testimonials.push({ quote: "", name: "Client Name", company: "" });
     } else if (action === "remove-testimonial") {
       C.testimonials.splice(Number(index), 1);
+    } else if (action === "remove-cert" || action === "remove-cv") {
+      const key = action === "remove-cert" ? "certificates" : "cvs";
+      const list = Array.isArray(C[key]) ? C[key] : [];
+      const item = list[Number(index)];
+      list.splice(Number(index), 1);
+      if (item && item.storagePath && FB && FB.deleteFile) {
+        FB.deleteFile(item.storagePath).catch(() => {});
+      }
     }
   }
 
@@ -639,6 +733,8 @@
     projects: "object",
     articles: "array",
     testimonials: "array",
+    certificates: "array",
+    cvs: "array",
     settings: "object",
   };
 
@@ -694,6 +790,8 @@
     $("#adminSave").addEventListener("click", save);
     $("#adminReset").addEventListener("click", reset);
     $("#adminClose").addEventListener("click", close);
+    const lockCancel = $("#adminLockCancel");
+    if (lockCancel) lockCancel.addEventListener("click", close);
     $("#adminExport").addEventListener("click", exportData);
     $("#adminImport").addEventListener("click", () => $("#adminFile").click());
     $("#adminFile").addEventListener("change", (e) => {
@@ -716,11 +814,78 @@
         return;
       }
       const actionBtn = event.target.closest("[data-list-action]");
-      if (!actionBtn) return;
-      event.preventDefault();
-      applyListAction(actionBtn.dataset.listAction, actionBtn.dataset.index);
-      showPane($$(".admin-tab", dash).find((t) => t.classList.contains("active")).dataset.tab);
+      if (actionBtn) {
+        event.preventDefault();
+        applyListAction(actionBtn.dataset.listAction, actionBtn.dataset.index);
+        showPane($$(".admin-tab", dash).find((t) => t.classList.contains("active")).dataset.tab);
+        return;
+      }
+      const uploadBtn = event.target.closest("[data-upload]");
+      if (uploadBtn) {
+        event.preventDefault();
+        const input = $("#" + uploadBtn.dataset.upload);
+        if (input) input.click();
+      }
     });
+
+    $("#adminMain").addEventListener("change", (event) => {
+      const input = event.target;
+      if (input.id === "adminCertFile" || input.id === "adminCvFile") {
+        const kind = input.id === "adminCertFile" ? "cert" : "cv";
+        const file = input.files && input.files[0];
+        input.value = "";
+        if (file) startUpload(kind, file);
+      }
+    });
+
+    async function startUpload(kind, file) {
+      const noteEl = $(kind === "cert" ? "#adminCertNote" : "#adminCvNote");
+      if (!FB || !FB.storageAvailable) {
+        if (noteEl) noteEl.textContent = "File storage is unavailable — enable Firebase Storage and publish the storage rules.";
+        showStatus("File storage is not enabled.", false);
+        return;
+      }
+      const user = FB.currentUser ? FB.currentUser() : null;
+      if (!user) {
+        if (noteEl) noteEl.textContent = "Sign in to upload files.";
+        return;
+      }
+      const safeName = String(file.name).replace(/[^\w.\-]+/g, "-");
+      const folder = kind === "cert" ? "certs" : "cvs";
+      const path = "blissjuli/" + folder + "/" + Date.now() + "-" + safeName;
+      if (noteEl) noteEl.textContent = "Uploading…";
+      try {
+        const url = await FB.uploadFile(path, file, (sent, total) => {
+          if (noteEl) {
+            noteEl.textContent = total
+              ? "Uploading… " + Math.round((sent / total) * 100) + "%"
+              : "Uploading…";
+          }
+        });
+        if (kind === "cert") {
+          C.certificates.push({
+            title: file.name.replace(/\.[^.]+$/, ""),
+            issuer: "",
+            year: "",
+            name: file.name,
+            url,
+            storagePath: path,
+          });
+        } else {
+          C.cvs.push({
+            label: file.name.replace(/\.[^.]+$/, ""),
+            name: file.name,
+            url,
+            storagePath: path,
+          });
+        }
+        if (noteEl) noteEl.textContent = "Uploaded. Click Save All to publish.";
+        showStatus(kind === "cert" ? "Certificate uploaded — click Save All to publish." : "CV uploaded — click Save All to publish.");
+        showPane($$(".admin-tab", dash).find((t) => t.classList.contains("active")).dataset.tab);
+      } catch (e) {
+        if (noteEl) noteEl.textContent = "Upload failed — check your connection and storage rules.";
+      }
+    }
 
     const signOutBtn = $("#adminSignOut");
     if (signOutBtn) {
@@ -790,6 +955,61 @@
         } finally {
           btn.disabled = false;
           btn.textContent = "Sign in";
+        }
+      });
+    }
+
+    const togglePass = $("#adminTogglePass");
+    const passInput = $("#adminLoginPass");
+    if (togglePass && passInput) {
+      togglePass.addEventListener("click", () => {
+        const saw = passInput.type === "text";
+        passInput.type = saw ? "password" : "text";
+        togglePass.setAttribute("aria-pressed", String(!saw));
+        togglePass.setAttribute(
+          "aria-label",
+          saw ? "Show password" : "Hide password"
+        );
+        passInput.focus();
+      });
+    }
+
+    const forgot = $("#adminForgot");
+    if (forgot) {
+      forgot.addEventListener("click", async () => {
+        const msg = $("#adminLockMsg");
+        const emailInput = $("#adminLoginEmail");
+        const email = emailInput.value.trim();
+        if (!email) {
+          emailInput.focus();
+          msg.textContent = "Enter your email above to send a reset link.";
+          msg.className = "admin-lock-msg admin-lock-err";
+          return;
+        }
+        if (!FB || !FB.authAvailable || !FB.sendPasswordReset) {
+          msg.textContent = "Password reset is unavailable right now. Check your connection.";
+          msg.className = "admin-lock-msg admin-lock-err";
+          return;
+        }
+        forgot.disabled = true;
+        msg.textContent = "Sending reset link…";
+        msg.className = "admin-lock-msg admin-lock-ok";
+        try {
+          await FB.sendPasswordReset(email);
+          msg.textContent = "Password reset email sent. Check your inbox.";
+          msg.className = "admin-lock-msg admin-lock-ok";
+        } catch (err) {
+          const code = err && err.code;
+          if (code === "auth/user-not-found") {
+            msg.textContent = "No account found for that email.";
+          } else if (code === "auth/invalid-email") {
+            msg.textContent = "That email address is not valid.";
+          } else {
+            msg.textContent = "Could not send the reset email. Try again shortly.";
+          }
+          msg.className = "admin-lock-msg admin-lock-err";
+        } finally {
+          forgot.disabled = false;
         }
       });
     }
