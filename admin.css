@@ -540,6 +540,17 @@ body.admin-open {
 .admin-lock-msg.admin-lock-err {
   color: #f87171;
 }
+.admin-upload-progress {
+  display: inline-block;
+  margin-right: 10px;
+  color: var(--muted, #6b7280);
+  font-size: 0.8rem;
+}
+.admin-btn-small {
+  margin-left: 4px;
+  padding: 4px 10px;
+  font-size: 0.72rem;
+}
 
 
 .admin-user {

@@ -239,5 +239,34 @@
       }
       return storage.ref().child(path).delete();
     },
+    uploadFileWithCancel(path, file, onProgress) {
+      if (!storage) {
+        return {
+          promise: Promise.reject(
+            storageError || new Error("File storage is unavailable.")
+          ),
+          cancel() {},
+        };
+      }
+      if (!file) {
+        return {
+          promise: Promise.reject(new Error("No file selected.")),
+          cancel() {},
+        };
+      }
+      const ref = storage.ref().child(path);
+      const task = ref.put(file);
+      if (typeof onProgress === "function") {
+        task.on("state_changed", (snapshot) =>
+          onProgress(snapshot.bytesTransferred, snapshot.totalBytes)
+        );
+      }
+      return {
+        promise: task.then(() => ref.getDownloadURL()),
+        cancel() {
+          try { task.cancel(); } catch (e) {}
+        },
+      };
+    },
   };
 })();

@@ -460,7 +460,7 @@
         <div class="af-actions">
           <button type="button" class="admin-btn" data-upload="adminCertFile">+ Upload certificate</button>
         </div>
-        <input type="file" id="adminCertFile" accept="image/*,application/pdf" hidden>
+        <input type="file" id="adminCertFile" accept="image/*,application/pdf" multiple hidden>
         <p class="af-note" id="adminCertNote"></p>
       </div>
       <div class="af-section">
@@ -825,6 +825,13 @@
         event.preventDefault();
         const input = $("#" + uploadBtn.dataset.upload);
         if (input) input.click();
+        return;
+      }
+      if (event.target.closest("#adminCancelUpload")) {
+        uploadSequenceCancelled = true;
+        if (activeUploadCancel) {
+          try { activeUploadCancel(); } catch (e) {}
+        }
       }
     });
 
@@ -832,11 +839,22 @@
       const input = event.target;
       if (input.id === "adminCertFile" || input.id === "adminCvFile") {
         const kind = input.id === "adminCertFile" ? "cert" : "cv";
-        const file = input.files && input.files[0];
+        const files = Array.from(input.files || []);
         input.value = "";
-        if (file) startUpload(kind, file);
+        if (files.length) uploadSequence(kind, files);
       }
     });
+
+    let uploadSequenceCancelled = false;
+    let activeUploadCancel = null;
+
+    async function uploadSequence(kind, files) {
+      uploadSequenceCancelled = false;
+      for (const file of files) {
+        if (uploadSequenceCancelled) break;
+        await startUpload(kind, file);
+      }
+    }
 
     async function startUpload(kind, file) {
       const noteEl = $(kind === "cert" ? "#adminCertNote" : "#adminCvNote");
@@ -853,15 +871,26 @@
       const safeName = String(file.name).replace(/[^\w.\-]+/g, "-");
       const folder = kind === "cert" ? "certs" : "cvs";
       const path = "blissjuli/" + folder + "/" + Date.now() + "-" + safeName;
-      if (noteEl) noteEl.textContent = "Uploading…";
+      if (noteEl) {
+        noteEl.innerHTML =
+          `<span class="admin-upload-progress">Uploading ${esc(file.name)}… 0%</span>` +
+          `<button type="button" class="admin-btn admin-btn-small" id="adminCancelUpload">Cancel</button>`;
+      }
       try {
-        const url = await FB.uploadFile(path, file, (sent, total) => {
+        const { promise, cancel } = FB.uploadFileWithCancel(path, file, (sent, total) => {
           if (noteEl) {
-            noteEl.textContent = total
-              ? "Uploading… " + Math.round((sent / total) * 100) + "%"
-              : "Uploading…";
+            const progress = noteEl.querySelector(".admin-upload-progress");
+            if (progress) {
+              progress.textContent = total
+                ? "Uploading " + esc(file.name) + "… " + Math.round((sent / total) * 100) + "%"
+                : "Uploading " + esc(file.name) + "…";
+            }
           }
         });
+        uploadSequenceCancelled = false;
+        activeUploadCancel = cancel;
+        const url = await promise;
+        activeUploadCancel = null;
         if (kind === "cert") {
           C.certificates.push({
             title: file.name.replace(/\.[^.]+$/, ""),
@@ -879,11 +908,14 @@
             storagePath: path,
           });
         }
-        if (noteEl) noteEl.textContent = "Uploaded. Click Save All to publish.";
         showStatus(kind === "cert" ? "Certificate uploaded — click Save All to publish." : "CV uploaded — click Save All to publish.");
-        showPane($$(".admin-tab", dash).find((t) => t.classList.contains("active")).dataset.tab);
+        const activeTab = $$(".admin-tab", dash).find((t) => t.classList.contains("active"));
+        if (activeTab) showPane(activeTab.dataset.tab);
       } catch (e) {
-        if (noteEl) noteEl.textContent = "Upload failed — check your connection and storage rules.";
+        activeUploadCancel = null;
+        const cancelled =
+          e && (e.code === 1 || String(e.code || e.message || "").toLowerCase().includes("cancel") || String(e.message || "").includes("storage/canceled"));
+        if (noteEl) noteEl.textContent = cancelled ? "Upload cancelled." : "Upload failed — check your connection and storage rules.";
       }
     }
 
