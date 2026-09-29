@@ -729,7 +729,7 @@ button:focus-visible > .arrow-mini,
   height: 28px;
 }
 .spec-card:hover .service-icon .icon {
-  transform: rotate(-8deg) scale(1.12);
+  transform: translateY(-2px);
 }
 
 .about-icon .icon {
@@ -737,7 +737,7 @@ button:focus-visible > .arrow-mini,
   height: 26px;
 }
 .about-card:hover .about-icon .icon {
-  transform: translateY(-3px) scale(1.1);
+  transform: translateY(-2px);
 }
 
 .edu-icon .icon {
@@ -745,7 +745,7 @@ button:focus-visible > .arrow-mini,
   height: 25px;
 }
 .edu-card:hover .edu-icon .icon {
-  transform: scale(1.12) rotate(-4deg);
+  transform: translateY(-2px);
 }
 
 .ach-icon .icon {
@@ -755,7 +755,7 @@ button:focus-visible > .arrow-mini,
   color: var(--primary);
 }
 .ach-card:hover .ach-icon .icon {
-  transform: translateY(-3px) scale(1.12);
+  transform: translateY(-2px);
 }
 
 .pm-item {
@@ -2676,9 +2676,14 @@ button.service-link {
   background: #FFFFFF;
   border: 1px solid rgba(17, 17, 17, 0.12);
   border-radius: 8px;
-  color: #15803D;
+  color: var(--primary);
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(17, 17, 17, 0.1);
+}
+.map-locate-box .icon {
+  width: 18px;
+  height: 18px;
+  display: block;
 }
 .map-locate-box:hover {
   background: var(--grad-primary);

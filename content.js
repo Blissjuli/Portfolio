@@ -516,34 +516,17 @@ window.BLISS_CONTENT = (() => {
 
 
 window.BLISS_ICONS = (() => {
-  const wrap = (inner) =>
-    `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+  const slot = (name) => `<i class="icon" data-icon="${name}"></i>`;
 
   return {
     service: [
-      wrap('<path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/>'),
-      wrap(
-        '<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>'
-      ),
-      wrap(
-        '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/>'
-      ),
-      wrap(
-        '<path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>'
-      ),
-      wrap(
-        '<path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><path d="M6 17h12"/>'
-      ),
+      slot("code-xml"),
+      slot("monitor"),
+      slot("database"),
+      slot("shirt"),
+      slot("book-open"),
     ],
-    article: [
-      wrap('<path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/>'),
-      wrap(
-        '<path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>'
-      ),
-      wrap(
-        '<path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/><path d="M6 17h12"/>'
-      ),
-    ],
+    article: [slot("code-xml"), slot("shirt"), slot("book-open")],
   };
 })();
 
