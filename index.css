@@ -53,9 +53,9 @@
   --olive-dark: #22C55E;
 
   --heading: #4ADE80;
-  --background: #0F0F0F;
-  --surface: #1A1A1A;
-  --soft-gray: #2A2A2A;
+  --background: #191A14;
+  --surface: #22251D;
+  --soft-gray: #2E3127;
 
   --text: #F5F5F5;
   --text-secondary: #C7C7C7;
@@ -66,16 +66,16 @@
   --border: rgba(255, 255, 255, 0.12);
 
   --primary: #4ADE80;
-  --on-primary: #0F0F0F;
+  --on-primary: #191A14;
   --gold: #4ADE80;
   --success: #10B981;
   --error: #EF4444;
-  --bg: #0F0F0F;
-  --bg-2: #141414;
-  --card: #1A1A1A;
-  --card-2: #1F1F1F;
-  --glass: rgba(15, 15, 15, 0.72);
-  --glass-strong: rgba(15, 15, 15, 0.92);
+  --bg: #191A14;
+  --bg-2: #1F211A;
+  --card: #22251D;
+  --card-2: #262A21;
+  --glass: rgba(25, 26, 20, 0.72);
+  --glass-strong: rgba(25, 26, 20, 0.92);
   --glass-border: rgba(255, 255, 255, 0.1);
   --muted: #C7C7C7;
   --radius: 16px;
@@ -2984,7 +2984,7 @@ button.service-link {
 
 
 [data-theme="dark"] body {
-  background: linear-gradient(180deg, #0F0F0F, #141414);
+  background: linear-gradient(180deg, #191A14, #1F211A);
 }
 [data-theme="dark"] .bg-grid {
   background-image:
@@ -2993,7 +2993,7 @@ button.service-link {
 }
 [data-theme="dark"] .glass-panel {
   border-color: rgba(74, 222, 128, 0.16);
-  background: linear-gradient(145deg, rgba(26, 26, 26, 0.72), rgba(15, 15, 15, 0.5));
+  background: linear-gradient(145deg, rgba(34, 37, 29, 0.72), rgba(25, 26, 20, 0.5));
   box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
 }
 [data-theme="dark"] .section-tag {
@@ -3001,7 +3001,7 @@ button.service-link {
   border-color: rgba(74, 222, 128, 0.4);
 }
 [data-theme="dark"] .glass {
-  background: linear-gradient(145deg, #1A1A1A, #0F0F0F);
+  background: linear-gradient(145deg, #22251D, #191A14);
   border-color: rgba(74, 222, 128, 0.16);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
@@ -3019,26 +3019,26 @@ button.service-link {
   background: rgba(74, 222, 128, 0.3);
 }
 [data-theme="dark"] .nav {
-  background: rgba(15, 15, 15, 0.85);
+  background: rgba(25, 26, 20, 0.85);
 }
 [data-theme="dark"] .nav.scrolled {
-  background: rgba(15, 15, 15, 0.94);
+  background: rgba(25, 26, 20, 0.94);
   border-color: rgba(74, 222, 128, 0.14);
   box-shadow: 0 16px 44px -24px rgba(0, 0, 0, 0.6);
 }
 [data-theme="dark"] .mobile-menu {
-  background: rgba(15, 15, 15, 0.98);
+  background: rgba(25, 26, 20, 0.98);
   border-left-color: rgba(74, 222, 128, 0.12);
 }
 [data-theme="dark"] .m-link {
   border-bottom-color: rgba(74, 222, 128, 0.1);
 }
 [data-theme="dark"] .float-badge {
-  background: rgba(26, 26, 26, 0.92);
+  background: rgba(34, 37, 29, 0.92);
   border-color: rgba(74, 222, 128, 0.16);
 }
 [data-theme="dark"] .stat-box {
-  background: linear-gradient(145deg, #1A1A1A, #0F0F0F);
+  background: linear-gradient(145deg, #22251D, #191A14);
   border-color: rgba(74, 222, 128, 0.14);
 }
 [data-theme="dark"] .stat-box::before {
@@ -3078,7 +3078,7 @@ button.service-link {
 [data-theme="dark"] .edu-card,
 [data-theme="dark"] .cert-card,
 [data-theme="dark"] .blog-card {
-  background: linear-gradient(145deg, #1A1A1A, #0F0F0F);
+  background: linear-gradient(145deg, #22251D, #191A14);
   border-color: rgba(74, 222, 128, 0.14);
 }
 [data-theme="dark"] .spec-card::before {
@@ -3087,17 +3087,17 @@ button.service-link {
 [data-theme="dark"] .project-media,
 [data-theme="dark"] .modal-media,
 [data-theme="dark"] .cert-ph {
-  background: linear-gradient(135deg, #1A1A1A, #0F0F0F);
+  background: linear-gradient(135deg, #22251D, #191A14);
 }
 [data-theme="dark"] .project-media video.project-video,
 [data-theme="dark"] .modal-media video.modal-video {
-  background: #0F0F0F;
+  background: #191A14;
 }
 [data-theme="dark"] .modal-backdrop {
   background: rgba(3, 7, 14, 0.72);
 }
 [data-theme="dark"] .modal-card {
-  background: linear-gradient(180deg, #1A1A1A, #141414);
+  background: linear-gradient(180deg, #22251D, #1F211A);
   border-color: rgba(74, 222, 128, 0.16);
   box-shadow: 0 40px 110px -40px rgba(0, 0, 0, 0.7);
 }
@@ -3137,7 +3137,7 @@ button.service-link {
 [data-theme="dark"] .form-group input,
 [data-theme="dark"] .form-group textarea,
 [data-theme="dark"] .newsletter input {
-  background: #141414;
+  background: #1F211A;
   border-color: rgba(74, 222, 128, 0.18);
 }
 [data-theme="dark"] .contact-list li,
@@ -3146,32 +3146,32 @@ button.service-link {
   border-top-color: rgba(74, 222, 128, 0.14);
 }
 [data-theme="dark"] .map-canvas .leaflet-container {
-  background: #141414;
+  background: #1F211A;
 }
 [data-theme="dark"] .map-canvas .leaflet-bar a {
-  background: #1A1A1A !important;
+  background: #22251D !important;
   color: #F5F5F5 !important;
   border-bottom-color: rgba(74, 222, 128, 0.14) !important;
 }
 [data-theme="dark"] .map-canvas .leaflet-bar a:hover {
-  background: #1F1F1F !important;
+  background: #262A21 !important;
   color: #FFFFFF !important;
 }
 [data-theme="dark"] .map-canvas .leaflet-bar a.leaflet-disabled {
-  background: #141414 !important;
+  background: #1F211A !important;
   color: #737373 !important;
 }
 [data-theme="dark"] .map-canvas .leaflet-control-layers {
-  background: #1A1A1A;
+  background: #22251D;
   border-color: rgba(74, 222, 128, 0.2);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 [data-theme="dark"] .map-canvas .leaflet-control-layers-toggle {
-  background-color: #1A1A1A;
+  background-color: #22251D;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2386EFAC' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 2 10 5-10 5L2 7z'/%3E%3Cpath d='m2 17 10 5 10-5'/%3E%3Cpath d='m2 12 10 5 10-5'/%3E%3C/svg%3E");
 }
 [data-theme="dark"] .map-canvas .leaflet-control-layers-toggle:hover {
-  background-color: #1F1F1F;
+  background-color: #262A21;
 }
 [data-theme="dark"] .map-canvas .leaflet-control-layers-expanded,
 [data-theme="dark"] .map-canvas .leaflet-control-layers-list label {
@@ -3181,33 +3181,33 @@ button.service-link {
   border-top-color: rgba(74, 222, 128, 0.14);
 }
 [data-theme="dark"] .map-canvas .leaflet-control-attribution {
-  background: rgba(15, 15, 15, 0.85);
+  background: rgba(25, 26, 20, 0.85);
   color: #C7C7C7;
 }
 [data-theme="dark"] .map-canvas .leaflet-control-attribution a {
   color: #86EFAC;
 }
 [data-theme="dark"] .map-canvas .leaflet-popup-content-wrapper {
-  background: #1F1F1F;
+  background: #262A21;
   color: #F5F5F5;
   border-color: rgba(74, 222, 128, 0.2);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 [data-theme="dark"] .map-canvas .leaflet-popup-tip {
-  background: #1F1F1F;
+  background: #262A21;
 }
 [data-theme="dark"] .map-locate-box {
-  background: #1A1A1A;
+  background: #22251D;
   border-color: rgba(74, 222, 128, 0.2);
   color: #F5F5F5;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 [data-theme="dark"] .map-locate-status {
-  background: rgba(15, 15, 15, 0.92);
+  background: rgba(25, 26, 20, 0.92);
   border-color: rgba(74, 222, 128, 0.18);
 }
 [data-theme="dark"] .footer {
-  background: linear-gradient(180deg, transparent, rgba(15, 15, 15, 0.94));
+  background: linear-gradient(180deg, transparent, rgba(25, 26, 20, 0.94));
   border-top-color: rgba(74, 222, 128, 0.12);
 }
 
