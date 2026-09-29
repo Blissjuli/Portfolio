@@ -264,7 +264,7 @@
     root.dataset.theme = theme;
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
-      meta.setAttribute("content", theme === "dark" ? "#0F0F0F" : "#FFFFFF");
+      meta.setAttribute("content", theme === "dark" ? "#000000" : "#FFFFFF");
     }
     if (themeToggle) {
       themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
@@ -1338,6 +1338,7 @@
     renderBlog();
     renderCertifications();
     renderCVs();
+    if (window.BLISS_ICON) window.BLISS_ICON.hydrate();
 
     
     const typingSpeed =
@@ -1506,11 +1507,11 @@
     });
 
     const darkLayer = L.tileLayer(
-      "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+      "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
       {
         maxZoom: 19,
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>',
+          "Tiles &copy; Esri &mdash; Source: Esri, Heatmap, FAO, NOAA, OpenStreetMap contributors, and the GIS User Community",
       }
     ).addTo(map);
 
@@ -1534,16 +1535,36 @@
       )
       .addTo(map);
 
-    const pinSvg =
-      '<svg width="34" height="42" viewBox="0 0 34 42" fill="none" aria-hidden="true"><defs><linearGradient id="pinGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#16A34A"/><stop offset="100%" stop-color="#22C55E"/></linearGradient></defs><path d="M17 1C8.7 1 2 7.7 2 16c0 11.5 15 25 15 25s15-13.5 15-25C32 7.7 25.3 1 17 1z" fill="url(#pinGrad)" stroke="rgba(0,0,0,0.5)" stroke-width="1"/><circle cx="17" cy="16" r="6.5" fill="#fff"/></svg>';
+    let mapFailed = false;
+    const showMapFallback = () => {
+      if (mapFailed) return;
+      mapFailed = true;
+      status.style.display = "none";
+      const fallback = createElement("a", "map-fallback-link");
+      fallback.href =
+        "https://www.openstreetmap.org/?mlat=" +
+        DEFAULT_COORDS[0] +
+        "&mlon=" +
+        DEFAULT_COORDS[1] +
+        "#map=14/" +
+        DEFAULT_COORDS[0] +
+        "/" +
+        DEFAULT_COORDS[1];
+      fallback.target = "_blank";
+      fallback.rel = "noopener";
+      fallback.textContent = "Open in Maps ↗";
+      pill.appendChild(fallback);
+    };
+    darkLayer.on("tileerror", showMapFallback);
+    satelliteLayer.on("tileerror", showMapFallback);
 
     const marker = L.marker(DEFAULT_COORDS, {
       icon: L.divIcon({
         className: "map-pin-div",
-        html: `<div class="map-pin" aria-hidden="true">${pinSvg}</div>`,
-        iconSize: [34, 42],
-        iconAnchor: [17, 41],
-        popupAnchor: [0, -40],
+        html: '<div class="map-pin" aria-hidden="true"></div>',
+        iconSize: [36, 36],
+        iconAnchor: [18, 33],
+        popupAnchor: [0, -34],
       }),
     })
       .addTo(map)
@@ -1606,7 +1627,8 @@
       anchor.title = "Show my location";
       anchor.setAttribute("aria-label", "Show my location");
       anchor.innerHTML =
-        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg>';
+        (window.BLISS_ICON && window.BLISS_ICON.icon("navigation", 18)) ||
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11 22 2l-9 19-2-8Z"/></svg>';
       on(anchor, "click", (event) => {
         event.preventDefault();
         requestLocation();
@@ -1745,7 +1767,18 @@
 
   
   const iconCalendar = () =>
-    '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>';
+    '<i class="icon" data-icon="calendar"></i>';
+
+  const iconArrowRight = () =>
+    '<i class="icon arrow-mini" data-icon="arrow-right"></i>';
+
+  const iconArrowUpRight = () =>
+    '<i class="icon arrow-up-mini" data-icon="arrow-up-right"></i>';
+
+  const iconStarRow = () =>
+    new Array(5)
+      .fill('<i class="icon" data-icon="star"></i>')
+      .join("");
 
   
   const sanitizeTagline = (value) => {
@@ -1771,7 +1804,7 @@
             <p>${esc(service.desc)}</p>
             <a href="#portfolio" class="service-link" data-filter="${esc(
               service.filter
-            )}">Learn More →</a>
+            )}">Learn More ${iconArrowRight()}</a>
           </div>`
       )
       .join("");
@@ -1957,13 +1990,13 @@
           )}" data-project="${esc(key)}" data-reveal>
             <div class="project-media" data-media="${mediaType}">
               ${cardMediaHtml(project)}
-              <div class="project-media-fallback"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></div>
+              <div class="project-media-fallback"><i class="icon" data-icon="image"></i></div>
             </div>
             <div class="project-body">
               <h3 class="project-title">${esc(project.title)}</h3>
               <p class="project-desc">${esc(project.description)}</p>
               <div class="project-meta">
-                <span class="pm-item"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>${esc(
+                <span class="pm-item"><i class="icon" data-icon="layers"></i>${esc(
                   project.client
                 )}</span>
                 <span class="pm-item">${iconCalendar()}${esc(
@@ -1997,7 +2030,7 @@
               <span class="blog-date">${iconCalendar()}${esc(article.date)}</span>
               <h3>${esc(article.title)}</h3>
               <p>${esc(article.excerpt || "")}</p>
-              <button type="button" class="service-link js-open-article" data-article="${index}">Read More →</button>
+              <button type="button" class="service-link js-open-article" data-article="${index}">Read More ${iconArrowRight()}</button>
             </div>
           </article>`
       )
@@ -2019,7 +2052,7 @@
           <figure class="testi-slide" role="group" aria-roledescription="slide">
             <div class="testi-avatar">${esc(initials)}</div>
             <figcaption>
-              <div class="testi-stars">★★★★★</div>
+              <div class="testi-stars" aria-hidden="true">${iconStarRow()}</div>
               <blockquote>${esc(testimonial.quote)}</blockquote>
               <p class="testi-name">${esc(testimonial.name)}</p>
               <p class="testi-company">${esc(testimonial.company)}</p>
@@ -2113,7 +2146,7 @@
           const year = esc(cert && cert.year ? String(cert.year) : "");
           const preview = isImageUrl(url)
             ? `<img src="${esc(url)}" alt="${esc(title)}" loading="lazy">`
-            : `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M9 11h1"/></svg><span class="cert-ph-label">${esc((cert && cert.name) || "PDF")}</span>`;
+            : `<i class="icon" data-icon="file-text"></i><span class="cert-ph-label">${esc((cert && cert.name) || "PDF")}</span>`;
           const isEmbedded = String(url || "").startsWith("data:");
           const linkAttrs = isEmbedded
             ? `download="${esc((cert && cert.name) || "certificate")}"`
@@ -2127,7 +2160,7 @@
               <h3>${title}</h3>
               <p class="cert-issuer">Issued by — ${issuer || "—"}</p>
               ${year ? `<span class="cert-date">${year}</span>` : ""}
-              <a href="${esc(url)}" class="btn btn-sm btn-primary" ${linkAttrs}>View Certificate ↗</a>
+              <a href="${esc(url)}" class="btn btn-sm btn-primary" ${linkAttrs}>View Certificate ${iconArrowUpRight()}</a>
             </div>
           </article>`;
         }
@@ -2155,7 +2188,7 @@
       a.setAttribute("download", cv.name || "");
       a.target = "_blank";
       a.rel = "noopener noreferrer";
-      a.appendChild(link ? link.querySelector("svg.icon").cloneNode(true) : document.createElement("span"));
+      a.appendChild(link ? link.querySelector("i.icon").cloneNode(true) : document.createElement("span"));
       a.appendChild(document.createTextNode(" " + esc(cv.label || "Download CV")));
       actions.appendChild(a);
     });
@@ -2169,6 +2202,7 @@
     renderTestimonials();
     renderCertifications();
     renderCVs();
+    if (window.BLISS_ICON) window.BLISS_ICON.hydrate();
   }
 
   const App = {
