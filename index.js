@@ -266,9 +266,17 @@
     }
   };
 
-  const syncThemeFromSettings = (animate = false) => {
+  const switchTheme = (theme) => {
+    const root = document.documentElement;
+    root.classList.add("theme-snap");
+    applyTheme(theme);
+    requestAnimationFrame(() => root.classList.remove("theme-snap"));
+    setTimeout(() => root.classList.remove("theme-snap"), 150);
+  };
+
+  const syncThemeFromSettings = () => {
     if (readThemePreference()) return;
-    applyTheme(resolveDefaultTheme(), animate);
+    applyTheme(resolveDefaultTheme());
   };
 
   function initializeTheme() {
@@ -278,14 +286,14 @@
         try {
           localStorage.setItem(THEME_KEY, next);
         } catch (e) {}
-        applyTheme(next);
+        switchTheme(next);
       });
     }
 
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const onSystemChange = () => {
       if ((SETTINGS.defaultTheme || "system") === "system") {
-        applyTheme(resolveDefaultTheme(), true);
+        switchTheme(resolveDefaultTheme());
       }
     };
     if (mq.addEventListener) mq.addEventListener("change", onSystemChange);

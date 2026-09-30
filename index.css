@@ -3340,6 +3340,12 @@ button.service-link {
   opacity: 0;
   transform: rotate(90deg) scale(0.5);
 }
+html.theme-snap,
+html.theme-snap *,
+html.theme-snap *::before,
+html.theme-snap *::after {
+  transition: none !important;
+}
 
 
 .section-title {
