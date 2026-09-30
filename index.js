@@ -253,7 +253,7 @@
 
   const applyTheme = (theme, animate = false) => {
     const root = document.documentElement;
-    if (animate) {
+    if (animate && !reduceMotion) {
       root.classList.add("theme-transition");
       clearTimeout(themeTransitionTimer);
       themeTransitionTimer = setTimeout(
@@ -287,7 +287,12 @@
         try {
           localStorage.setItem(THEME_KEY, next);
         } catch (e) {}
-        applyTheme(next, true);
+        const apply = () => applyTheme(next, true);
+        if (reduceMotion) {
+          apply();
+        } else {
+          requestAnimationFrame(() => requestAnimationFrame(apply));
+        }
       });
     }
 

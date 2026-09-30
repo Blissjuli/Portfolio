@@ -550,6 +550,12 @@ html {
     opacity: 1;
     transform: none;
   }
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition: none !important;
+  }
   .glass,
   .glass-panel,
   .nav,
@@ -3347,15 +3353,11 @@ button.service-link {
 .theme-transition *::before,
 .theme-transition *::after {
   transition:
-    background-color 0.45s var(--ease),
-    background 0.45s var(--ease),
-    color 0.45s var(--ease),
-    border-color 0.45s var(--ease),
-    border-bottom-color 0.45s var(--ease),
-    border-top-color 0.45s var(--ease),
-    box-shadow 0.45s var(--ease),
-    fill 0.45s var(--ease),
-    stroke 0.45s var(--ease) !important;
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease),
+    border-bottom-color 0.3s var(--ease),
+    border-top-color 0.3s var(--ease) !important;
 }
 .theme-transition [data-reveal] {
   transition:
