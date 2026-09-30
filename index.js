@@ -258,7 +258,7 @@
       clearTimeout(themeTransitionTimer);
       themeTransitionTimer = setTimeout(
         () => root.classList.remove("theme-transition"),
-        500
+        250
       );
     }
     root.dataset.theme = theme;

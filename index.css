@@ -3353,17 +3353,11 @@ button.service-link {
 .theme-transition *::before,
 .theme-transition *::after {
   transition:
-    background-color 0.3s var(--ease),
-    color 0.3s var(--ease),
-    border-color 0.3s var(--ease),
-    border-bottom-color 0.3s var(--ease),
-    border-top-color 0.3s var(--ease) !important;
-}
-.theme-transition [data-reveal] {
-  transition:
-    opacity 0.9s var(--ease),
-    transform 0.9s var(--ease) !important;
-  transition-delay: var(--d, 0s) !important;
+    background-color 0.15s var(--ease),
+    color 0.15s var(--ease),
+    border-color 0.15s var(--ease),
+    border-bottom-color 0.15s var(--ease),
+    border-top-color 0.15s var(--ease) !important;
 }
 
 
