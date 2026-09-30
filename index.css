@@ -550,12 +550,6 @@ html {
     opacity: 1;
     transform: none;
   }
-  .theme-transition,
-  .theme-transition *,
-  .theme-transition *::before,
-  .theme-transition *::after {
-    transition: none !important;
-  }
   .glass,
   .glass-panel,
   .nav,
@@ -3312,11 +3306,11 @@ button.service-link {
   color: var(--text);
   overflow: hidden;
   transition:
-    transform 0.3s var(--ease),
-    border-color 0.3s,
-    box-shadow 0.3s,
-    background 0.3s,
-    color 0.3s;
+    transform 0.15s var(--ease),
+    border-color 0.15s,
+    box-shadow 0.15s,
+    background 0.15s,
+    color 0.15s;
 }
 .theme-toggle:hover {
   transform: translateY(-2px) rotate(8deg);
@@ -3331,8 +3325,8 @@ button.service-link {
   width: 19px;
   height: 19px;
   transition:
-    transform 0.5s var(--ease),
-    opacity 0.35s;
+    transform 0.15s var(--ease),
+    opacity 0.12s;
 }
 .theme-toggle .icon-moon {
   opacity: 0;
@@ -3345,19 +3339,6 @@ button.service-link {
 [data-theme="dark"] .theme-toggle .icon-sun {
   opacity: 0;
   transform: rotate(90deg) scale(0.5);
-}
-
-
-.theme-transition,
-.theme-transition *,
-.theme-transition *::before,
-.theme-transition *::after {
-  transition:
-    background-color 0.15s var(--ease),
-    color 0.15s var(--ease),
-    border-color 0.15s var(--ease),
-    border-bottom-color 0.15s var(--ease),
-    border-top-color 0.15s var(--ease) !important;
 }
 
 

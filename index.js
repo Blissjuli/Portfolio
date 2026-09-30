@@ -226,7 +226,6 @@
 
   
   const THEME_KEY = "blissjuli.theme";
-  let themeTransitionTimer = null;
 
   const themeToggle = document.getElementById("themeToggle");
 
@@ -251,16 +250,8 @@
   const currentTheme = () =>
     document.documentElement.dataset.theme === "dark" ? "dark" : "light";
 
-  const applyTheme = (theme, animate = false) => {
+  const applyTheme = (theme) => {
     const root = document.documentElement;
-    if (animate && !reduceMotion) {
-      root.classList.add("theme-transition");
-      clearTimeout(themeTransitionTimer);
-      themeTransitionTimer = setTimeout(
-        () => root.classList.remove("theme-transition"),
-        250
-      );
-    }
     root.dataset.theme = theme;
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
@@ -287,12 +278,7 @@
         try {
           localStorage.setItem(THEME_KEY, next);
         } catch (e) {}
-        const apply = () => applyTheme(next, true);
-        if (reduceMotion) {
-          apply();
-        } else {
-          requestAnimationFrame(() => requestAnimationFrame(apply));
-        }
+        applyTheme(next);
       });
     }
 
