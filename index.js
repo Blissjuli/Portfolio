@@ -1466,79 +1466,114 @@
 
   
 
+
   function initializeLiveMap() {
     const wrap = select(".map-wrap");
     const container = wrap ? select(".map-canvas", wrap) : null;
     if (!wrap || !container) return;
+    if (container._blissMapInitialized) return;
+    container._blissMapInitialized = true;
+
+    const MAP_LAYER_KEY = "blissjuli.mapLayer";
+    const DEFAULT_COORDS = [5.1069, 7.3667];
+    const DEFAULT_LABEL = "Aba, Abia State, Nigeria";
 
     const pill = createElement("div", "map-locate");
     pill.setAttribute("role", "status");
     pill.setAttribute("aria-live", "polite");
-    wrap.appendChild(pill);
-
+    const pillIcon = createElement("span", "map-locate-icon");
+    if (window.BLISS_ICON) {
+      pillIcon.innerHTML = window.BLISS_ICON.icon("map-pin", 14);
+    }
     const status = createElement("span", "map-locate-status");
     status.textContent = "Loading map…";
+    pill.appendChild(pillIcon);
     pill.appendChild(status);
+    wrap.appendChild(pill);
 
-    const button = createElement("button", "map-locate-btn");
-    button.type = "button";
-    button.textContent = "Show my location";
-    button.hidden = true;
-    pill.appendChild(button);
-
-    const setStatus = (message, located = false) => {
-      status.textContent = message;
+    const setStatus = (text, located = false) => {
+      status.textContent = text;
       status.classList.toggle("is-located", located);
     };
 
-    if (!window.L) {
+    if (!window.L || !window.L.map) {
       setStatus("Map could not be loaded.");
       return;
     }
 
-    const DEFAULT_COORDS = [5.1069, 7.3667];
-    const DEFAULT_LABEL = "Aba, Abia State, Nigeria";
+    const safe = (value) =>
+      String(value == null ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
 
     const map = L.map(container, {
       center: DEFAULT_COORDS,
       zoom: 14,
+      minZoom: 3,
+      maxZoom: 19,
       scrollWheelZoom: false,
+      zoomControl: false,
+      attributionControl: false,
+      zoomAnimation: !reduceMotion,
+      fadeAnimation: !reduceMotion,
+      markerZoomAnimation: !reduceMotion,
     });
+    container._blissMap = map;
 
-    const darkLayer = L.tileLayer(
-      "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
-      {
-        maxZoom: 19,
+    L.control.attribution({ prefix: false }).addTo(map);
+
+    const LAYERS = {
+      Dark: {
+        url: "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+        className: "map-tiles-dark",
         attribution:
           "Tiles &copy; Esri &mdash; Source: Esri, Heatmap, FAO, NOAA, OpenStreetMap contributors, and the GIS User Community",
-      }
-    ).addTo(map);
-
-    const satelliteLayer = L.tileLayer(
-      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-      {
-        maxZoom: 19,
+      },
+      Light: {
+        url: "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+        className: "map-tiles-light",
         attribution:
-          "Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community",
-      }
-    );
+          "Tiles &copy; Esri &mdash; Source: Esri, OpenStreetMap contributors, and the GIS User Community",
+      },
+      Satellite: {
+        url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+        className: "map-tiles-satellite",
+        attribution:
+          "Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, OpenStreetMap contributors, and the GIS User Community",
+      },
+    };
 
-    L.control
-      .layers(
-        {
-          Map: darkLayer,
-          Satellite: satelliteLayer,
-        },
-        null,
-        { position: "topright" }
-      )
-      .addTo(map);
+    const makeLayer = (name) =>
+      L.tileLayer(LAYERS[name].url, {
+        maxZoom: 19,
+        className: LAYERS[name].className,
+        attribution: LAYERS[name].attribution,
+      });
+
+    const baseLayers = {
+      Dark: makeLayer("Dark"),
+      Light: makeLayer("Light"),
+      Satellite: makeLayer("Satellite"),
+    };
+
+    let preferred = "";
+    try {
+      preferred = localStorage.getItem(MAP_LAYER_KEY) || "";
+    } catch (err) {}
+    const defaultName =
+      preferred === "dark" || preferred === "light" || preferred === "satellite"
+        ? preferred.charAt(0).toUpperCase() + preferred.slice(1)
+        : currentTheme() === "dark"
+          ? "Dark"
+          : "Light";
+    map.addLayer(baseLayers[defaultName]);
 
     let mapFailed = false;
     const showMapFallback = () => {
       if (mapFailed) return;
       mapFailed = true;
-      status.style.display = "none";
       const fallback = createElement("a", "map-fallback-link");
       fallback.href =
         "https://www.openstreetmap.org/?mlat=" +
@@ -1554,8 +1589,28 @@
       fallback.textContent = "Open in Maps ↗";
       pill.appendChild(fallback);
     };
-    darkLayer.on("tileerror", showMapFallback);
-    satelliteLayer.on("tileerror", showMapFallback);
+    Object.keys(baseLayers).forEach((name) => {
+      baseLayers[name].on("tileerror", showMapFallback);
+    });
+
+    const layersControl = L.control
+      .layers(baseLayers, null, {
+        position: "topright",
+        collapsed: true,
+        autoZIndex: true,
+        sortLayers: true,
+      })
+      .addTo(map);
+    map.on("baselayerchange", (event) => {
+      try {
+        localStorage.setItem(MAP_LAYER_KEY, event.name.toLowerCase());
+      } catch (err) {}
+    });
+    const layersToggle = select(".leaflet-control-layers-toggle", container);
+    if (layersToggle) {
+      layersToggle.setAttribute("aria-label", "Change map style");
+      layersToggle.title = "Change map style";
+    }
 
     const marker = L.marker(DEFAULT_COORDS, {
       icon: L.divIcon({
@@ -1563,90 +1618,247 @@
         html: '<div class="map-pin" aria-hidden="true"></div>',
         iconSize: [36, 36],
         iconAnchor: [18, 33],
-        popupAnchor: [0, -34],
+        popupAnchor: [0, -36],
       }),
-    })
-      .addTo(map)
-      .bindPopup(DEFAULT_LABEL, { closeButton: false });
+    }).addTo(map);
 
-    const formatCoords = (lat, lng) => `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+    let accuracyCircle = null;
+    const cssVar = (name) =>
+      getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const setAccuracy = (coords, radius) => {
+      if (accuracyCircle) map.removeLayer(accuracyCircle);
+      accuracyCircle = null;
+      if (!radius || radius <= 0) return;
+      accuracyCircle = L.circle(coords, {
+        radius,
+        interactive: false,
+        stroke: true,
+        weight: 1.5,
+        opacity: 0.35,
+        color: cssVar("--primary") || "#15803D",
+        fillColor: cssVar("--primary") || "#15803D",
+        fillOpacity: 0.12,
+      }).addTo(map);
+    };
 
-    const locationPopup = (coords) => {
-      const now = new Date();
-      const time = now.toLocaleTimeString(undefined, {
+    const timeShort = () =>
+      new Date().toLocaleTimeString(undefined, {
         hour: "numeric",
         minute: "2-digit",
       });
-      const date = now.toLocaleDateString(undefined, {
-        month: "short",
-        day: "numeric",
-      });
-      return `<strong class="map-popup-title">Your Current Location</strong><br>${esc(
-        formatCoords(coords[0], coords[1])
-      )}<br><span class="map-popup-meta">Obtained ${esc(date)}, ${esc(
-        time
-      )}</span>`;
+    const formatCoords = (lat, lng) => `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+
+    const buildPopup = (title, sub, meta, coordsStyle) =>
+      '<div class="map-popup">' +
+      '<strong class="map-popup-title">' +
+      safe(title) +
+      "</strong>" +
+      '<span class="map-popup-sub' +
+      (coordsStyle ? " is-coords" : "") +
+      '">' +
+      safe(sub) +
+      "</span>" +
+      '<span class="map-popup-meta">' +
+      safe(meta) +
+      "</span>" +
+      "</div>";
+
+    const POPUP_OPTIONS = {
+      minWidth: 200,
+      maxWidth: 260,
+      autoPan: true,
+      keepInView: true,
+      autoPanPaddingTopLeft: [20, 60],
+      autoPanPaddingBottomRight: [20, 20],
     };
 
-    const applyLocation = (position) => {
-      const { latitude, longitude } = position.coords;
-      const coords = [latitude, longitude];
+    const openPopup = (html) => {
+      marker.setPopupContent(html);
+      marker.openPopup();
+      const closeBtn = select(".leaflet-popup-close-button", container);
+      if (closeBtn && !closeBtn.getAttribute("aria-label")) {
+        closeBtn.setAttribute("aria-label", "Close popup");
+      }
+    };
+
+    map.whenReady(() => {
+      marker.bindPopup("", POPUP_OPTIONS);
+      openPopup(
+        buildPopup(
+          DEFAULT_LABEL,
+          formatCoords(DEFAULT_COORDS[0], DEFAULT_COORDS[1]),
+          "Updated " + timeShort(),
+          true
+        )
+      );
+    });
+
+    const shortPlace = (address) => {
+      const a = address || {};
+      const primary =
+        a.road ||
+        a.pedestrian ||
+        a.building ||
+        a.suburb ||
+        a.neighbourhood ||
+        a.industrial;
+      const area =
+        a.suburb ||
+        a.neighbourhood ||
+        a.village ||
+        a.town ||
+        a.city ||
+        a.municipality;
+      const region = a.state;
+      const parts = [];
+      if (primary) parts.push(primary);
+      if (area && area !== primary) parts.push(area);
+      if (region && region !== area) parts.push(region);
+      if (parts.length) return parts.slice(0, 3).join(", ");
+      if (a.city || a.country) {
+        return [a.city, a.country].filter(Boolean).join(", ");
+      }
+      return null;
+    };
+
+    const geocodeDisplay = (lat, lng) => {
+      const url =
+        "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" +
+        lat.toFixed(5) +
+        "&lon=" +
+        lng.toFixed(5) +
+        "&zoom=18&addressdetails=1";
+      const controller = "AbortController" in window ? new AbortController() : null;
+      const timer = controller ? setTimeout(() => controller.abort(), 6000) : 0;
+      return fetch(url, {
+        headers: { Accept: "application/json" },
+        signal: controller ? controller.signal : undefined,
+      })
+        .then((response) =>
+          response.ok ? response.json() : Promise.reject(new Error("geocode"))
+        )
+        .then(
+          (data) =>
+            shortPlace(data && data.address) ||
+            (data && data.display_name
+              ? data.display_name.split(",").slice(0, 2).join(",").trim()
+              : null)
+        )
+        .catch(() => null)
+        .then((place) => {
+          if (timer) clearTimeout(timer);
+          return place;
+        });
+    };
+
+    const showLocation = (position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const coords = [lat, lng];
+      setAccuracy(coords, position.coords.accuracy);
       map.setView(coords, 15, { animate: !reduceMotion });
-      marker
-        .setLatLng(coords)
-        .setPopupContent(locationPopup(coords))
-        .openPopup();
+
+      const fill = (place) => {
+        openPopup(
+          buildPopup(
+            "You are here",
+            place || formatCoords(lat, lng),
+            "Updated " + timeShort(),
+            !place
+          )
+        );
+      };
+
+      map.once("moveend", () => {
+        fill(null);
+        geocodeDisplay(lat, lng).then((place) => {
+          if (place) fill(place);
+        });
+      });
       setStatus("Map centred on your location", true);
-      button.hidden = true;
     };
 
     const requestLocation = () => {
+      if (locating) return;
+      locating = true;
+      locateBtn.classList.add("is-loading");
+      locateBtn.setAttribute("aria-disabled", "true");
       setStatus("Locating you…");
-      button.hidden = true;
       navigator.geolocation.getCurrentPosition(
-        applyLocation,
-        (error) => {
-          const denied = error && error.code === 1;
-          setStatus(
-            denied
-              ? "Location permission denied — showing default map."
-              : "Couldn't reach GPS — showing default map."
-          );
-          button.hidden = false;
+        (position) => {
+          locating = false;
+          locateBtn.classList.remove("is-loading");
+          locateBtn.setAttribute("aria-disabled", "false");
+          showLocation(position);
         },
-        { timeout: 8000, maximumAge: 5 * 60 * 1000 }
+        (error) => {
+          locating = false;
+          locateBtn.classList.remove("is-loading");
+          locateBtn.setAttribute("aria-disabled", "false");
+          const code = error && error.code;
+          setStatus(
+            code === 1
+              ? "Location permission denied — showing default map."
+              : code === 3
+                ? "Location lookup timed out — showing default map."
+                : "Couldn't reach GPS — showing default map."
+          );
+          map.setView(DEFAULT_COORDS, 14, { animate: !reduceMotion });
+          setAccuracy(DEFAULT_COORDS, 0);
+        },
+        { timeout: 8000, maximumAge: 10000, enableHighAccuracy: true }
       );
     };
 
-    const locateControl = L.control({ position: "topright" });
-    locateControl.onAdd = () => {
-      const anchor = createElement("a", "map-locate-box");
-      anchor.href = "#";
-      anchor.setAttribute("role", "button");
-      anchor.title = "Show my location";
-      anchor.setAttribute("aria-label", "Show my location");
-      anchor.innerHTML =
-        (window.BLISS_ICON && window.BLISS_ICON.icon("navigation", 18)) ||
-        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11 22 2l-9 19-2-8Z"/></svg>';
-      on(anchor, "click", (event) => {
-        event.preventDefault();
-        requestLocation();
-      });
-      return anchor;
-    };
-    locateControl.addTo(map);
+    const locateBtn = createElement("a", "map-locate-box");
+    locateBtn.href = "#";
+    locateBtn.setAttribute("role", "button");
+    locateBtn.title = "Centre on my location";
+    locateBtn.setAttribute("aria-label", "Centre on my location");
+    locateBtn.innerHTML =
+      (window.BLISS_ICON && window.BLISS_ICON.icon("navigation", 20)) ||
+      '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11 22 2l-9 19-2-8Z"/></svg>';
+    let locating = false;
 
-    let wheelEnabled = false;
-    map.on("click", () => {
-      if (!wheelEnabled) {
-        wheelEnabled = true;
-        map.scrollWheelZoom.enable();
-      }
+    const LocateControl = L.Control.extend({
+      options: { position: "topright" },
+      onAdd() {
+        on(locateBtn, "click", (event) => {
+          event.preventDefault();
+          requestLocation();
+        });
+        return locateBtn;
+      },
     });
+    new LocateControl().addTo(map);
 
-    on(button, "click", requestLocation);
+    L.control.zoom({ position: "topright" }).addTo(map);
+    const zoomIn = select(".leaflet-control-zoom-in", container);
+    const zoomOut = select(".leaflet-control-zoom-out", container);
+    if (zoomIn) zoomIn.setAttribute("aria-label", "Zoom in");
+    if (zoomOut) zoomOut.setAttribute("aria-label", "Zoom out");
 
-    setTimeout(() => map.invalidateSize(), 600);
+    const enableWheel = () => {
+      if (!map.scrollWheelZoom.enabled()) map.scrollWheelZoom.enable();
+    };
+    map.on("click", enableWheel);
+    container.setAttribute("tabindex", "0");
+    container.addEventListener("focusin", enableWheel);
+
+    const refreshSize = () => map.invalidateSize({ animate: !reduceMotion });
+    setTimeout(refreshSize, 300);
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            refreshSize();
+            io.disconnect();
+          }
+        },
+        { threshold: 0.1 }
+      );
+      io.observe(wrap);
+    }
 
     if (!("geolocation" in navigator)) {
       setStatus("Location not supported by this browser — showing default map.");
@@ -1654,13 +1866,11 @@
     }
     if (window.isSecureContext === false) {
       setStatus("Location needs a secure (HTTPS) connection — showing default map.");
-      button.hidden = false;
       return;
     }
     requestLocation();
   }
 
-  
 
   function initializeTypewriters() {
     typewriterSignature = textsSignature;
